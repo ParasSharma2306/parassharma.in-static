@@ -16,6 +16,7 @@ class Terminal {
         this.input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const command = this.input.value;
+                // Print the user's command with the prompt
                 this.printToTerminal(`<span class="prompt-echo">paras@home:~$ ${command}</span>`);
                 this.handleCommand(command);
                 this.input.value = '';
@@ -32,8 +33,11 @@ class Terminal {
     }
 
     focusInput() {
-        this.input.focus();
-        this.output.scrollTop = this.output.scrollHeight;
+        // Only focus if not disabled (e.g. during reset)
+        if (!this.input.disabled) {
+            this.input.focus();
+            this.output.scrollTop = this.output.scrollHeight;
+        }
     }
 
     printToTerminal(text) {
@@ -131,12 +135,23 @@ Instagram:  <a href="https://instagram.com/parassharma2306" target="_blank">inst
                 break;
             
             case 'reset':
-                this.printToTerminal("Resetting ParasOS...");
-                this.printToTerminal("Clearing saved settings and reloading in 3s...");
+                // 1. Lock input immediately
+                this.input.disabled = true;
+                this.printToTerminal("System reset initiated...");
+                
+                // 2. Clear data
                 localStorage.removeItem('paras-icon-positions');
                 localStorage.removeItem('paras-notepad-content');
                 localStorage.removeItem('theme');
-                setTimeout(() => location.reload(), 3000);
+
+                // 3. Show confirmation text
+                this.printToTerminal("Clearing local caches...");
+                
+                // 4. Reload after a delay (allows user to read text)
+                setTimeout(() => {
+                    this.printToTerminal("Rebooting...");
+                    setTimeout(() => window.location.reload(), 500);
+                }, 1500);
                 break;
 
             case 'exit':
@@ -147,6 +162,10 @@ Instagram:  <a href="https://instagram.com/parassharma2306" target="_blank">inst
             case 'firstphone':
                 this.printToTerminal("Ah, the legend. It was a Redmi Note 7S (Onyx Black, 3/32GB) from 2019.");
                 this.printToTerminal("It had more patience than I did... and probably weighed less than my grandpa's love. (It was a brick.)");
+                break;
+
+            case '':
+                // Ignore empty enter keys
                 break;
 
             default:
