@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paras Sharma - Home</title>
+    <!-- Import Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Pixelify+Sans:wght@400..700&family=Source_Code_Pro:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Link to Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Trigger Script-->
+    <script src="js/app.js" type="module" defer></script>
+</head>
+<body> <!-- Theme class will be added here by JS -->
+
+    <!-- Boot Screen -->
+    <div class="boot-screen" id="boot-screen">
+        <h1 class="boot-title">ParasOS</h1>
+        <p>Loading personal environment...</p>
+    </div>
+
+    <!-- Desktop holds all icons and windows -->
+    <main class="desktop" id="desktop">
+
+        <!-- Desktop Icons (Positioned by JS) -->
+        <div class="desktop-icons">
+            
+            <div class="icon" id="icon-projects" data-icon-id="projects">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6ZM18 6L12 11L6 6H18ZM18 18H6V8.23631L12 12.6102L18 8.23631V18Z"></path></svg>
+                <span>Projects.exe</span>
+            </div>
+            
+            <div class="icon" id="icon-about" data-icon-id="about">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM12 20C9.33 20 7.01 18.73 5.5 16.89C5.64 14.94 9.33 13.9 12 13.9C14.67 13.9 18.36 14.94 18.5 16.89C17 18.73 14.67 20 12 20Z"></path></svg>
+                <span>About.me</span>
+            </div>
+
+            <div class="icon" id="icon-tribute" data-icon-id="tribute">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"></path></svg>
+                <span>Tribute.dat</span>
+            </div>
+            
+            <div class="icon" id="icon-terminal" data-icon-id="terminal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3H20C21.1046 3 22 3.89543 22 5V19C22 20.1046 21.1046 21 20 21H4C2.89543 21 2 20.1046 2 19V5C2 3.89543 2.89543 3 4 3ZM5 16L9 12L5 8V16ZM10 17H19V15H10V17Z"></path></svg>
+                <span>Terminal.sh</span>
+            </div>
+            
+            <div class="icon" id="icon-settings" data-icon-id="settings">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94C19.03 12.4 18.8 11.88 18.46 11.41L18.45 11.4L19.3 10.54C19.74 10.1 19.74 9.4 19.3 8.96L17.04 6.7C16.6 6.26 15.9 6.26 15.46 6.7L14.6 7.55L14.59 7.54C14.12 7.2 13.6 6.97 13.06 6.86L12.9 5.72C12.83 5.16 12.32 4.7 11.75 4.7H10.25C9.68 4.7 9.17 5.16 9.1 5.72L8.94 6.86C8.4 6.97 7.88 7.2 7.41 7.54L7.4 7.55L6.54 6.7C6.1 6.26 5.4 6.26 4.96 6.7L2.7 8.96C2.26 9.4 2.26 10.1 2.7 10.54L3.55 11.4L3.54 11.41C3.2 11.88 2.97 12.4 2.86 12.94L1.72 13.1C1.16 13.17 0.7 13.68 0.7 14.25V15.75C0.7 16.32 1.16 16.83 1.72 16.9L2.86 17.06C2.97 17.6 3.2 18.12 3.54 18.59L3.55 18.6L2.7 19.46C2.26 19.9 2.26 20.6 2.7 21.04L4.96 23.3C5.4 23.74 6.1 23.74 6.54 23.3L7.4 22.45L7.41 22.46C7.88 22.8 8.4 23.03 8.94 23.14L9.1 24.28C9.17 24.84 9.68 25.3 10.25 25.3H11.75C12.32 25.3 12.83 24.84 12.9 24.28L13.06 23.14C13.6 23.03 14.12 22.8 14.59 22.46L14.6 22.45L15.46 23.3C15.9 23.74 16.6 23.74 17.04 23.3L19.3 21.04C19.74 20.6 19.74 19.9 19.3 19.46L18.45 18.6L18.46 18.59C18.8 18.12 19.03 17.6 19.14 17.06L20.28 16.9C20.84 16.83 21.3 16.32 21.3 15.75V14.25C21.3 13.68 20.84 13.17 20.28 13.1L19.14 12.94ZM11 18C9.34 18 8 16.66 8 15C8 13.34 9.34 12 11 12C12.66 12 14 13.34 14 15C14 16.66 12.66 18 11 18Z"></path></svg>
+                <span>Settings.cfg</span>
+            </div>
+
+            <div class="icon" id="icon-snake" data-icon-id="snake">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H10C6.69 2 4 4.69 4 8V11H6V8C6 5.79 7.79 4 10 4H14C16.21 4 18 5.79 18 8V16C18 18.21 16.21 20 14 20H12V22H14C17.31 22 20 19.31 20 16V8C20 4.69 17.31 2 14 2ZM8 12V14H4V12H8ZM6 18H4V20H6V18ZM8 16H4V18H8V16ZM10 18H8V20H10V18ZM14 16H12V18H14V16ZM12 12H6V14H12V12Z"></path></svg>
+                <span>Snake.gm</span>
+            </div>
+            
+            <div class="icon" id="icon-notepad" data-icon-id="notepad">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15 4H5C3.89543 4 3 4.89543 3 6V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V9L15 4ZM5 18V6H14V10H19V18H5ZM7 8H12V10H7V8ZM7 12H17V14H7V12Z"></path></svg>
+                <span>Notepad.txt</span>
+            </div>
+            
+            <div class="icon" id="icon-pfd" data-icon-id="pfd">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM4 12C4 11.71 4.02 11.42 4.05 11.14L7.13 13.19L4.39 15.39C4.15 14.33 4 13.19 4 12ZM12 4C13.19 4 14.33 4.15 15.39 4.39L13.19 7.13L11.14 4.05C11.42 4.02 11.71 4 12 4ZM12 20C10.81 20 9.67 19.85 8.61 19.61L10.81 16.87L12.87 19.95C12.58 19.98 12.29 20 12 20ZM18.86 19.95L16.81 16.87L19.61 8.61C19.85 9.67 20 10.81 20 12C20 13.19 19.85 14.33 19.61 15.39L18.86 19.95ZM15.39 19.61L13.19 16.87L11.14 19.95C11.42 19.98 11.71 20 12 20C12.29 20 12.58 19.98 12.87 19.95L15.39 19.61ZM8.61 4.39L10.81 7.13L12.87 4.05C12.58 4.02 12.29 4 12 4C11.71 4 11.42 4.02 11.14 4.05L8.61 4.39ZM4.05 12.87L7.13 10.81L4.39 8.61C4.15 9.67 4 10.81 4 12C4 12.29 4.02 12.58 4.05 12.87ZM7.13 13.19L4.05 11.14C4.02 11.42 4 11.71 4 12C4 10.81 4.15 9.67 4.39 8.61L7.13 13.19ZM16.87 13.19L19.95 15.39C19.98 15.12 20 14.83 20 14.5C20 13.31 19.85 12.17 19.61 11.11L16.87 13.19ZM16.87 10.81L19.61 12.87C19.85 11.81 20 10.67 20 9.5C20 8.61 19.85 7.73 19.61 6.89L16.87 10.81Z"></path></svg>
+                <span>PFD.app</span>
+            </div>
+
+            <div class="icon" id="icon-legal" data-icon-id="legal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.99902L21.5 6.71302V12.941C21.5 18.06 17.4 22.483 12 23.854C6.6 22.483 2.5 18.06 2.5 12.941V6.71302L12 1.99902ZM12 10.999H14.5V12.999H12V16.999H10V12.999H7.5V10.999H10V6.99902H12V10.999Z"></section></svg>
+                <span>Legal.txt</span>
+            </div>
+
+            <div class="icon" id="icon-help" data-icon-id="help">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 17C12.83 17 13.5 16.33 13.5 15.5C13.5 14.67 12.83 14 12 14C11.17 14 10.5 14.67 10.5 15.5C10.5 16.33 11.17 17 12 17ZM12 7C10.62 7 9.5 8.12 9.5 9.5H11.5C11.5 9.22 11.72 9 12 9C12.28 9 12.5 9.22 12.5 9.5C12.5 9.78 12.28 10 12 10C11.45 10 11 10.45 11 11V13H13V11C13 9.62 14.12 8.5 12.5 8.5C11.56 8.5 11.1 7.9 12 7Z"></path></svg>
+                <span>Help.app</span>
+            </div>
+
+        </div>
+
+
+        <!-- Window Templates -->
+
+        <!-- Projects Window -->
+        <div class="window" id="window-projects" data-dock-icon="dock-projects">
+            <header class="window-header">
+                <span class="window-title">My Projects</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <h2>Projects.exe</h2>
+                <p>A few things I've built.</p>
+                <ul>
+                    <li>
+                        <strong><a href="https://parassharma.com" target="_blank" rel="noopener noreferrer">parassharma.com (CLI)</a>:</strong> My professional, terminal-based portfolio (`guest@RMNB-1002`). This is all business, built for speed and fellow devs.
+                    </li>
+                    <li>
+                        <strong><a href="#" onclick="return false;">parassharma.in (GUI)</a>:</strong> My personal, interactive desktop (you're here!). This is all heart, built for exploring, secrets, and fun.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- About Window -->
+        <div class="window" id="window-about" data-dock-icon="dock-about">
+            <header class="window-header">
+                <span class="window-title">About Me & My Foundation</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <h2>About.me</h2>
+                <p>Hello! I'm <span id="paras-name-easter-egg" class="clickable-name" style="user-select:none; display: inline-block;">Paras Sharma</span>. I'm obsessed with technology and aircrafts, I like flight sims particularly X-Plane 11, I wanna be a pilot, and I love programming. This is my personal corner of the internet, built from scratch with love.</p>
+                
+                <h3>My Foundation</h3>
+                <p>I'm built on the love and support of some incredible people:</p>
+                <ul>
+                    <li data-hover-tribute="heart"><strong>My Grandma:</strong> For showing me that strength and kindness can (and should) exist in the same person.</li>
+                    <li data-hover-tribute="heart"><strong>Garima Didi:</strong> To my sister, for being my first and most honest critic, and for always pushing me to be better.</li>
+                    <li data-hover-tribute="heart"><strong>Dikshita:</strong> To my girlfriend and to-be-wife, for being the lighthouse. It's really that simple.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tribute Window -->
+        <div class="window" id="window-tribute" data-dock-icon="dock-tribute">
+            <header class="window-header">
+                <span class="window-title">A Tribute</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <h2>Tribute.dat</h2>
+                <p>This section is dedicated to my grandpa.</p>
+                <p>He was the one who bought me my <strong>first phone</strong>. I remember he would fight anyone for me, always taking my side, always believing in me. He was my champion.</p>
+                <p>He taught me that to love someone is to stand up for them, no matter what. I miss him a lot, and this site is, in many ways, inspired by that strength.</p>
+                <br>
+                <p><small>P.S. Try typing `firstphone` in the terminal.</small></p>
+            </div>
+        </div>
+
+        <!-- Terminal Window -->
+        <div class="window" id="window-terminal" data-dock-icon="dock-terminal">
+            <header class="window-header">
+                <span class="window-title">Terminal</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <div class="terminal-output" id="terminal-output">
+                    <p>Welcome to ParasOS v1.0</p>
+                    <p>Type 'help' to see available commands.</p>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="terminal-prompt">paras@home:~$</span>
+                    <input type="text" class="terminal-input" id="terminal-input" autofocus>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Window -->
+        <div class="window" id="window-settings" data-dock-icon="dock-settings">
+            <header class="window-header">
+                <span class="window-title">Settings</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <h2>Settings.cfg</h2>
+                <p>Choose your theme:</p>
+                <div class="theme-buttons">
+                    <button class="theme-btn active" data-theme="">Nord-Sakura (Default)</button>
+                    <button class="theme-btn" data-theme="theme-dark">Nord-Dark</button>
+                    <button class="theme-btn" data-theme="theme-sepia">Sepia-Tone</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Snake Window -->
+        <div class="window" id="window-snake" data-dock-icon="dock-snake">
+            <header class="window-header">
+                <span class="window-title">Snake</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <div id="snake-score">Score: 0</div>
+                <canvas id="snake-canvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Notepad Window -->
+        <div class="window" id="window-notepad" data-dock-icon="dock-notepad">
+            <header class="window-header">
+                <span class="window-title">Notepad</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <textarea id="notepad-textarea" placeholder="Your notes are saved automatically..."></textarea>
+            </div>
+        </div>
+
+        <!-- PFD Window -->
+        <div class="window" id="window-pfd" data-dock-icon="dock-pfd">
+            <header class="window-header">
+                <span class="window-title">PFD.app</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <canvas id="pfd-canvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Legal Window -->
+        <div class="window" id="window-legal" data-dock-icon="dock-legal">
+            <header class="window-header">
+                <span class="window-title">Legal</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <h2>Legal.txt</h2>
+                <p>Copyright &copy; 2025 Paras Sharma. All Rights Reserved.</p>
+                <p>This website (parassharma.in) and its companion website (parassharma.com) are personal, non-commercial projects.</p>
+                <p>All content, designs, and code were created by Paras Sharma unless otherwise stated. The "Snake" and "PFD" applications are original implementations inspired by classic concepts.</p>
+                <p>This project is open-source. Feel free to explore the code, but please do not replicate it for commercial use without permission.</p>
+            </div>
+        </div>
+
+        <!-- Help Window -->
+        <div class="window" id="window-help" data-dock-icon="dock-help">
+            <header class="window-header">
+                <span class="window-title">Help</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content">
+                <h2>Help.app</h2>
+                <p>Welcome to ParasOS! Here's how to get around:</p>
+                
+                <h3>On Desktop:</h3>
+                <ul>
+                    <li><strong>Open Apps:</strong> Double-click an icon.</li>
+                    <li><strong>Move Icons:</strong> Click and drag icons to arrange them. Positions are saved!</li>
+                    <li><strong>Move Windows:</strong> Click and drag the header bar.</li>
+                    <li><strong>Manage Windows:</strong> Use the top-left buttons to (Red) Close, (Yellow) Minimize, or (Green) Maximize.</li>
+                    <li><strong>Dock:</strong> Minimized apps appear in the dock at the bottom. Click to restore.</li>
+                </ul>
+
+                <h3>On Mobile / Tablet:</h3>
+                <ul>
+                    <li><strong>Open Apps:</strong> Single-tap an icon.</li>
+                    <li><strong>Manage Windows:</strong> Apps open full-screen. Use the (Red) Close button to return to the desktop.</li>
+                </ul>
+
+                <h3>Find Secrets!</h3>
+                <p>This site is full of easter eggs. Try the terminal, try clicking things, try the Konami code... just explore!</p>
+            </div>
+        </div>
+
+
+    </main>
+
+    <!-- Dock -->
+    <div class="dock" id="dock">
+        <div class="dock-icon" id="dock-projects" data-window="window-projects">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6ZM18 6L12 11L6 6H18ZM18 18H6V8.23631L12 12.6102L18 8.23631V18Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-about" data-window="window-about">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM12 20C9.33 20 7.01 18.73 5.5 16.89C5.64 14.94 9.33 13.9 12 13.9C14.67 13.9 18.36 14.94 18.5 16.89C17 18.73 14.67 20 12 20Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-tribute" data-window="window-tribute">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-terminal" data-window="window-terminal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3H20C21.1046 3 22 3.89543 22 5V19C22 20.1046 21.1046 21 20 21H4C2.89543 21 2 20.1046 2 19V5C2 3.89543 2.89543 3 4 3ZM5 16L9 12L5 8V16ZM10 17H19V15H10V17Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-settings" data-window="window-settings">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94C19.03 12.4 18.8 11.88 18.46 11.41L18.45 11.4L19.3 10.54C19.74 10.1 19.74 9.4 19.3 8.96L17.04 6.7C16.6 6.26 15.9 6.26 15.46 6.7L14.6 7.55L14.59 7.54C14.12 7.2 13.6 6.97 13.06 6.86L12.9 5.72C12.83 5.16 12.32 4.7 11.75 4.7H10.25C9.68 4.7 9.17 5.16 9.1 5.72L8.94 6.86C8.4 6.97 7.88 7.2 7.41 7.54L7.4 7.55L6.54 6.7C6.1 6.26 5.4 6.26 4.96 6.7L2.7 8.96C2.26 9.4 2.26 10.1 2.7 10.54L3.55 11.4L3.54 11.41C3.2 11.88 2.97 12.4 2.86 12.94L1.72 13.1C1.16 13.17 0.7 13.68 0.7 14.25V15.75C0.7 16.32 1.16 16.83 1.72 16.9L2.86 17.06C2.97 17.6 3.2 18.12 3.54 18.59L3.55 18.6L2.7 19.46C2.26 19.9 2.26 20.6 2.7 21.04L4.96 23.3C5.4 23.74 6.1 23.74 6.54 23.3L7.4 22.45L7.41 22.46C7.88 22.8 8.4 23.03 8.94 23.14L9.1 24.28C9.17 24.84 9.68 25.3 10.25 25.3H11.75C12.32 25.3 12.83 24.84 12.9 24.28L13.06 23.14C13.6 23.03 14.12 22.8 14.59 22.46L14.6 22.45L15.46 23.3C15.9 23.74 16.6 23.74 17.04 23.3L19.3 21.04C19.74 20.6 19.74 19.9 19.3 19.46L18.45 18.6L18.46 18.59C18.8 18.12 19.03 17.6 19.14 17.06L20.28 16.9C20.84 16.83 21.3 16.32 21.3 15.75V14.25C21.3 13.68 20.84 13.17 20.28 13.1L19.14 12.94ZM11 18C9.34 18 8 16.66 8 15C8 13.34 9.34 12 11 12C12.66 12 14 13.34 14 15C14 16.66 12.66 18 11 18Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-snake" data-window="window-snake">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H10C6.69 2 4 4.69 4 8V11H6V8C6 5.79 7.79 4 10 4H14C16.21 4 18 5.79 18 8V16C18 18.21 16.21 20 14 20H12V22H14C17.31 22 20 19.31 20 16V8C20 4.69 17.31 2 14 2ZM8 12V14H4V12H8ZM6 18H4V20H6V18ZM8 16H4V18H8V16ZM10 18H8V20H10V18ZM14 16H12V18H14V16ZM12 12H6V14H12V12Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-notepad" data-window="window-notepad">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15 4H5C3.89543 4 3 4.89543 3 6V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V9L15 4ZM5 18V6H14V10H19V18H5ZM7 8H12V10H7V8ZM7 12H17V14H7V12Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-pfd" data-window="window-pfd">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM4 12C4 11.71 4.02 11.42 4.05 11.14L7.13 13.19L4.39 15.39C4.15 14.33 4 13.19 4 12ZM12 4C13.19 4 14.33 4.15 15.39 4.39L13.19 7.13L11.14 4.05C11.42 4.02 11.71 4 12 4ZM12 20C10.81 20 9.67 19.85 8.61 19.61L10.81 16.87L12.87 19.95C12.58 19.98 12.29 20 12 20ZM18.86 19.95L16.81 16.87L19.61 8.61C19.85 9.67 20 10.81 20 12C20 13.19 19.85 14.33 19.61 15.39L18.86 19.95ZM15.39 19.61L13.19 16.87L11.14 19.95C11.42 19.98 11.71 20 12 20C12.29 20 12.58 19.98 12.87 19.95L15.39 19.61ZM8.61 4.39L10.81 7.13L12.87 4.05C12.58 4.02 12.29 4 12 4C11.71 4 11.42 4.02 11.14 4.05L8.61 4.39ZM4.05 12.87L7.13 10.81L4.39 8.61C4.15 9.67 4 10.81 4 12C4 12.29 4.02 12.58 4.05 12.87ZM7.13 13.19L4.05 11.14C4.02 11.42 4 11.71 4 12C4 10.81 4.15 9.67 4.39 8.61L7.13 13.19ZM16.87 13.19L19.95 15.39C19.98 15.12 20 14.83 20 14.5C20 13.31 19.85 12.17 19.61 11.11L16.87 13.19ZM16.87 10.81L19.61 12.87C19.85 11.81 20 10.67 20 9.5C20 8.61 19.85 7.73 19.61 6.89L16.87 10.81Z"></path></svg>
+        </div>
+        <div class="dock-icon" id="dock-legal" data-window="window-legal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.99902L21.5 6.71302V12.941C21.5 18.06 17.4 22.483 12 23.854C6.6 22.483 2.5 18.06 2.5 12.941V6.71302L12 1.99902ZM12 10.999H14.5V12.999H12V16.999H10V12.999H7.5V10.999H10V6.99902H12V10.999Z"></section></svg>
+        </div>
+        <div class="dock-icon" id="dock-help" data-window="window-help">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM12 17C12.83 17 13.5 16.33 13.5 15.5C13.5 14.67 12.83 14 12 14C11.17 14 10.5 14.67 10.5 15.5C10.5 16.33 11.17 17 12 17ZM12 7C10.62 7 9.5 8.12 9.5 9.5H11.5C11.5 9.22 11.72 9 12 9C12.28 9 12.5 9.22 12.5 9.5C12.5 9.78 12.28 10 12 10C11.45 10 11 10.45 11 11V13H13V11C13 9.62 14.12 8.5 12.5 8.5C11.56 8.5 11.1 7.9 12 7Z"></path></svg>
+        </div>
+    </div>
+
+</body>
+</html>
