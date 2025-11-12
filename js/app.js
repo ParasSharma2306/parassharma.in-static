@@ -1,32 +1,57 @@
-// Import the main Desktop class
 import Desktop from './Desktop.js';
 import AudioPlayer from './AudioPlayer.js';
 
-// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     
     const desktopElement = document.getElementById('desktop');
     const bootScreen = document.getElementById('boot-screen');
+    const bootText = document.querySelector('.boot-screen p'); 
     
     if (desktopElement && bootScreen) {
         
-        // 1. Play boot sound
-        AudioPlayer.play(261.63, 0.2, 'sine', 0); // C4
-        AudioPlayer.play(523.25, 0.4, 'sine', 200); // C5
-        
-        // 2. Hide boot screen after a delay
-        setTimeout(() => {
-            bootScreen.classList.add('is-hidden');
-            desktopElement.classList.add('is-ready');
-            
-            // 3. Initialize the Desktop *after* it's visible
-            const desktop = new Desktop(desktopElement);
-            desktop.init();
+        // Note the 'async' keyword here!
+        const startSystem = async () => {
+            console.log("User interaction detected. Initializing...");
 
-        }, 2000); // 2-second boot time
+            // 1. WAITING for Audio Engine to wake up
+            try {
+                await AudioPlayer.ensureContext();
+                console.log("Audio Engine Ready.");
+            } catch (err) {
+                console.error("Audio failed to start:", err);
+            }
+
+            // 2. Play Sound (Now we know engine is ready)
+            // We call the specific playChime function we made
+            AudioPlayer.playChime();
+
+            // 3. Visual Feedback
+            if (bootText) {
+                bootText.innerText = "System Initialized.";
+                bootText.classList.remove('blink');
+            }
+
+            // 4. Transition to Desktop
+            setTimeout(() => {
+                bootScreen.classList.add('hidden'); 
+                desktopElement.classList.add('is-ready');
+                
+                const desktop = new Desktop(desktopElement);
+                desktop.init();
+
+                setTimeout(() => {
+                    bootScreen.style.display = 'none';
+                }, 1000);
+
+            }, 1000); 
+        };
+
+        // Listeners
+        bootScreen.addEventListener('click', startSystem, { once: true });
+        window.addEventListener('keydown', startSystem, { once: true });
+        window.addEventListener('touchstart', startSystem, { once: true });
 
     } else {
-        console.error("Fatal: Main desktop or boot-screen element not found.");
+        console.error("Elements not found.");
     }
-
 });

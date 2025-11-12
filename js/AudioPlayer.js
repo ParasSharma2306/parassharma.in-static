@@ -1,110 +1,100 @@
-/**
- * A singleton class to manage the Web Audio API context
- * and play sounds.
- */
 class AudioPlayer {
     constructor() {
-        if (AudioPlayer.instance) {
-            return AudioPlayer.instance;
-        }
-        // Try to create context
+        if (AudioPlayer.instance) return AudioPlayer.instance;
+
+        this.audioCtx = null;
+        
+        // Create context immediately, but it will start in 'suspended' state
         try {
-             this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (AudioContext) {
+                this.audioCtx = new AudioContext();
+            }
         } catch (e) {
-            console.warn("Web Audio API is not supported in this browser.");
-            this.audioCtx = null;
+            console.warn("Web Audio API not supported");
         }
-       
+
         AudioPlayer.instance = this;
     }
 
     /**
-     * Plays a sound with a given frequency, duration, type, and delay.
+     * Ensures the audio context is running. 
+     * Must be called inside a click/keydown event.
      */
-    play(freq, duration, type = 'square', delay = 0) {
+    async ensureContext() {
         if (!this.audioCtx) return;
         
-        // Resume context if it's suspended (e.g., on user interaction)
         if (this.audioCtx.state === 'suspended') {
-            this.audioCtx.resume();
+            await this.audioCtx.resume();
+            console.log("🔊 Audio Engine Woke Up. State:", this.audioCtx.state);
+        }
+    }
+
+    /**
+     * Plays a raw sound. No fancy fading. Just beep.
+     */
+    play(freq, duration, type = 'triangle', delay = 0) {
+        if (!this.audioCtx) return;
+
+        // Safety: If somehow we aren't running, try to resume (might fail if no user gesture)
+        if (this.audioCtx.state === 'suspended') {
+            this.audioCtx.resume().catch(e => console.log("Auto-resume failed:", e));
         }
 
-        setTimeout(() => {
-            const oscillator = this.audioCtx.createOscillator();
-            const gainNode = this.audioCtx.createGain(); 
-            
-            oscillator.type = type;
-            oscillator.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
 
-            oscillator.connect(gainNode);
-            gainNode.connect(this.audioCtx.destination);
-            
-            // Set initial volume
-            gainNode.gain.setValueAtTime(0.2, this.audioCtx.currentTime); // Lowered volume
-            // Fade out
-            gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioCtx.currentTime + duration - 0.01);
+        osc.type = type;
+        osc.frequency.value = freq;
 
-            oscillator.start(this.audioCtx.currentTime);
-            oscillator.stop(this.audioCtx.currentTime + duration);
-        }, delay);
+        // --- HARD VOLUME (No Fades) ---
+        // Set volume to 30%. 
+        gain.gain.value = 0.3; 
+
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+
+        // Schedule play
+        // We add 0.05s buffer to ensure we don't schedule in the past
+        const now = this.audioCtx.currentTime;
+        const startTime = now + delay + 0.05; 
+        const endTime = startTime + duration;
+
+        osc.start(startTime);
+        osc.stop(endTime);
     }
 
-    /**
-     * Plays the Konami reward chime.
-     */
-    playKonamiReward() {
-        console.log("Konami Code Activated!");
-        const baseFreq = 261.63; // C4
-        const fifth = baseFreq * 1.5; // G4
-        const octave = baseFreq * 2; // C5
-        const majThird = baseFreq * 1.25; // E4
-        
-        this.play(baseFreq, 0.1, 'triangle', 0);
-        this.play(majThird, 0.1, 'triangle', 100);
-        this.play(fifth, 0.1, 'triangle', 200);
-        this.play(octave, 0.1, 'triangle', 300);
-        this.play(octave * 1.5, 0.2, 'sine', 450);
-        this.play(octave * 2, 0.3, 'sine', 500);
-    }
+    // --- PRESET SOUNDS ---
 
-    /**
-     * Plays a simple "bloop" sound.
-     */
-    playBloop() {
-        this.play(1046.50, 0.1, 'sine'); // C6
-    }
-
-    /**
-     * Plays a gentle "chime" sound.
-     */
     playChime() {
-        this.play(880.00, 0.2, 'sine'); // A5
-        this.play(1046.50, 0.2, 'sine', 100); // C6
+        console.log("🎵 Playing Chime...");
+        // C4 then C5
+        this.play(261.63, 0.3, 'triangle', 0);
+        this.play(523.25, 0.6, 'triangle', 0.3); 
     }
 
-    // --- UI Sounds ---
+    playKonamiReward() {
+        this.play(261.63, 0.1, 'square', 0);
+        this.play(329.63, 0.1, 'square', 0.1);
+        this.play(392.00, 0.1, 'square', 0.2);
+        this.play(523.25, 0.2, 'square', 0.3);
+    }
 
-    /**
-     * Plays a "window open" sound.
-     */
     playWindowOpen() {
-        this.play(880, 0.05, 'sine'); // A5
+        this.play(880, 0.1, 'sine'); // High Beep
     }
 
-    /**
-     * Plays a "window minimize" sound.
-     */
     playWindowMinimize() {
-        this.play(440, 0.05, 'triangle'); // A4
+        this.play(440, 0.1, 'triangle'); // Mid Beep
     }
 
-    /**
-     * Plays a "window close" sound.
-     */
     playWindowClose() {
-        this.play(220, 0.05, 'sawtooth'); // A3
+        this.play(220, 0.1, 'sawtooth'); // Low Beep
+    }
+    
+    playBloop() {
+        this.play(1046.50, 0.1, 'sine'); 
     }
 }
 
-// Export a single instance of the AudioPlayer
 export default new AudioPlayer();

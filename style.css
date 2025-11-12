@@ -565,3 +565,35 @@ body.theme-dark #window-terminal .window-content {
     #window-notepad .window-content { padding: 0; }
     #window-pfd .window-content { padding: 0; }
 }
+/* Ensure Boot Screen covers everything */
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000; /* Black BIOS background */
+    color: #0f0; /* Terminal Green */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Top priority */
+    transition: opacity 0.8s ease-in-out; /* Smooth fade out */
+    cursor: pointer;
+}
+
+/* Class to hide the screen after clicking */
+.boot-screen.hidden {
+    opacity: 0;
+    pointer-events: none; /* Allow clicking through to the desktop */
+}
+
+/* Optional: Blinking cursor effect for the text */
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
