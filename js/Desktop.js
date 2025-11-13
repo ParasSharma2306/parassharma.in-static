@@ -66,14 +66,6 @@ class Desktop {
                 icon.addEventListener(this.openEvent, () => {
                     if (icon.dataset.isDragging === 'true') return;
                     
-                    // Integrity Check for Snake
-                    if (iconId === 'icon-snake') {
-                        const integrity = parseInt(localStorage.getItem('paras-system-integrity') || 100);
-                        if (integrity < 30) {
-                            alert("⛔ SYSTEM INTEGRITY CRITICAL. Fun is cancelled.");
-                            return;
-                        }
-                    }
                     win.open();
                 });
             }
