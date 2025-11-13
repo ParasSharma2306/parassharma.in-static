@@ -1,6 +1,7 @@
-/* --- CSS Reset & Base Styles --- */
+/* =========================================
+   1. CORE VARIABLES & RESET
+   ========================================= */
 :root {
-    /* ... theme variables ... */
     --bg-color: #eceff4;
     --desktop-bg: #e5e9f0;
     --window-bg: #ffffff;
@@ -25,7 +26,6 @@
 }
 
 body.theme-dark {
-    /* ... theme-dark variables ... */
     --bg-color: #3b4252;
     --desktop-bg: #2e3440;
     --window-bg: #434c5e;
@@ -44,7 +44,6 @@ body.theme-dark {
 }
 
 body.theme-sepia {
-    /* ... theme-sepia variables ... */
     --bg-color: #f4f0e8;
     --desktop-bg: #efe8d5;
     --window-bg: #fdfaf3;
@@ -62,17 +61,10 @@ body.theme-sepia {
     --shadow-dark: rgba(93, 64, 55, 0.2);
 }
 
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
+    height: 100%; width: 100%; overflow: hidden;
     font-family: var(--font-main);
     background-color: var(--desktop-bg);
     touch-action: manipulation;
@@ -81,519 +73,243 @@ html, body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- Boot Screen Styles --- */
+/* =========================================
+   2. BOOT SCREEN
+   ========================================= */
 .boot-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--desktop-bg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    transition: opacity 0.5s ease-out;
-    opacity: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 1000; transition: opacity 0.5s ease-out; opacity: 1;
 }
-.boot-screen.is-hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-.boot-title {
-    font-family: var(--font-pixel);
-    font-size: 4rem;
-    color: var(--text-color);
-    animation: boot-flicker 1s ease-in-out infinite alternate;
-}
-.boot-screen p {
-    font-family: var(--font-mono);
-    color: var(--text-color);
-    margin-top: 1rem;
-}
-@keyframes boot-flicker {
-    from { opacity: 0.8; }
-    to { opacity: 1; }
-}
+.boot-screen.is-hidden { opacity: 0; pointer-events: none; }
+.boot-title { font-family: var(--font-pixel); font-size: 4rem; color: var(--text-color); animation: boot-flicker 1s ease-in-out infinite alternate; }
+.boot-screen p { font-family: var(--font-mono); color: var(--text-color); margin-top: 1rem; }
 
-
-/* --- Desktop Environment --- */
+/* =========================================
+   3. DESKTOP & ICONS
+   ========================================= */
 .desktop {
-    width: 100%;
-    height: 100vh;
+    width: 100%; height: 100vh;
     background-color: var(--desktop-bg);
     background-image: linear-gradient(190deg, var(--bg-color) 0%, var(--desktop-bg) 100%);
-    /* Use padding in JS for bounds */
-    position: relative;
-    cursor: default;
-    transition: background-color 0.3s ease-out, background-image 0.3s ease-out;
-    will-change: background-color;
-    opacity: 0; 
-    transition: opacity 0.3s ease-out;
+    position: relative; cursor: default;
+    opacity: 0; transition: opacity 0.3s ease-out;
 }
-.desktop.is-ready {
-    opacity: 1;
-}
-
-.desktop-icons {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
+.desktop.is-ready { opacity: 1; }
+.desktop-icons { position: relative; width: 100%; height: 100%; }
 
 .icon {
-    position: absolute;
-    top: 2rem; 
-    left: 2rem; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    text-align: center;
-    color: var(--icon-text);
-    cursor: grab;
-    border-radius: 8px;
-    padding: 8px;
-    transition: transform 0.2s ease-out, background-color 0.2s ease-out, color 0.3s ease-out;
-    will-change: transform;
-    user-select: none; 
+    position: absolute; top: 2rem; left: 2rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 80px; text-align: center; color: var(--icon-text);
+    cursor: grab; border-radius: 8px; padding: 8px;
+    transition: transform 0.2s ease-out, background-color 0.2s ease-out;
+    user-select: none; will-change: transform;
 }
-.icon:active {
-    cursor: grabbing;
-}
-.icon.is-dragging {
-    z-index: 98;
-    background-color: var(--shadow-light);
-}
-.icon:hover {
-    animation: icon-jiggle 0.3s;
-    background-color: var(--shadow-light);
-}
+.icon:active { cursor: grabbing; }
+.icon.is-dragging, .icon:hover { z-index: 98; background-color: var(--shadow-light); }
+.icon:hover { animation: icon-jiggle 0.3s; }
 
-body.theme-dark .icon:hover,
-body.theme-dark .icon.is-dragging {
-     background-color: rgba(255, 255, 255, 0.1);
-}
+body.theme-dark .icon:hover, body.theme-dark .icon.is-dragging { background-color: rgba(255, 255, 255, 0.1); }
 
 .icon svg {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 8px;
-    fill: var(--accent-color);
-    transition: fill 0.3s ease-out;
-    filter: drop-shadow(0 2px 3px var(--shadow-light));
-    pointer-events: none; 
+    width: 48px; height: 48px; margin-bottom: 8px;
+    fill: var(--accent-color); transition: fill 0.3s ease-out;
+    filter: drop-shadow(0 2px 3px var(--shadow-light)); pointer-events: none;
+}
+.icon span {
+    font-size: 0.875rem; font-weight: 500; text-shadow: 0 1px 2px var(--shadow-light);
+    transition: text-shadow 0.3s ease-out; pointer-events: none;
 }
 
-/* Specific Icon Colors */
+/* Icon Specific Colors */
 #icon-terminal svg { fill: var(--accent-blue); }
 #icon-settings svg { fill: #81a1c1; } 
 #icon-snake svg { fill: #a3be8c; } 
 #icon-notepad svg { fill: #ebcb8b; } 
-#icon-pfd svg { fill: #bf616a; } /* Replaced Radar */
+#icon-pfd svg { fill: #bf616a; }
 #icon-legal svg { fill: #8fbcbb; } 
 #icon-help svg { fill: #5e81ac; } 
+#icon-focus svg { fill: #ebcb8b; }
 
-.icon span {
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-shadow: 0 1px 2px var(--shadow-light);
-    transition: text-shadow 0.3s ease-out;
-    pointer-events: none; 
-}
-
-/* --- Window Styles --- */
+/* =========================================
+   4. WINDOW SYSTEM
+   ========================================= */
 .window {
-    display: none;
-    position: absolute;
-    top: 100px;
-    left: 150px;
-    width: 640px;
-    max-width: 90vw;
-    height: 480px;
-    max-height: 80vh;
-    background-color: var(--window-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    box-shadow: 0 10px 30px var(--shadow-dark);
-    resize: both;
-    overflow: hidden;
-    min-width: 300px;
-    min-height: 200px;
-    z-index: 10;
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out, background-color 0.3s ease-out, border-color 0.3s ease-out,
-                top 0.2s ease-out, left 0.2s ease-out, width 0.2s ease-out, height 0.2s ease-out;
-    will-change: transform, opacity, top, left, width, height;
+    display: none; position: absolute; top: 100px; left: 150px;
+    width: 640px; max-width: 90vw; height: 480px; max-height: 80vh;
+    background-color: var(--window-bg); border: 1px solid var(--border-color);
+    border-radius: 10px; box-shadow: 0 10px 30px var(--shadow-dark);
+    resize: both; overflow: hidden; min-width: 300px; min-height: 200px;
+    z-index: 10; opacity: 1; transform: scale(1);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
-.window.is-maximized {
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 0;
-    resize: none;
-    box-shadow: none;
-}
-.window.is-minimized {
-    opacity: 0;
-    transform: scale(0.8);
-    z-index: 0;
-    top: 100vh;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out, top 0s linear 0.3s;
-}
+.window.is-maximized { top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border-radius: 0; resize: none; }
+.window.is-minimized { opacity: 0; transform: scale(0.8); top: 100vh; transition: top 0s linear 0.3s, opacity 0.3s; }
 .window.is-opening { animation: window-open 0.2s ease-out; }
 .window.is-active { z-index: 99; }
+
 .window-header {
-    background-color: var(--window-header);
-    color: var(--header-text);
-    padding: 8px 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: var(--window-header); color: var(--header-text);
+    padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;
     cursor: grab;
-    transition: background-color 0.3s ease-out, color 0.3s ease-out;
 }
-.window-header:active { cursor: grabbing; }
-.window-title {
-    font-weight: 700;
-    font-family: var(--font-pixel);
-    letter-spacing: 1px;
-}
+.window-title { font-weight: 700; font-family: var(--font-pixel); letter-spacing: 1px; }
 .window-controls { display: flex; gap: 8px; }
-.window-btn {
-    width: 12px;
-    height: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.1s ease-out;
-}
+.window-btn { width: 12px; height: 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 50%; cursor: pointer; }
 .window-btn:hover { transform: scale(1.1); }
 .btn-close { background-color: var(--close-btn); }
 .btn-min { background-color: var(--min-btn); }
 .btn-max { background-color: var(--max-btn); }
+
 .window-content {
-    padding: 1.5rem;
-    height: calc(100% - 37px);
-    overflow-y: auto;
-    color: var(--text-color);
-    line-height: 1.6;
-    background-color: var(--window-bg);
-    transition: background-color 0.3s ease-out, color 0.3s ease-out;
+    padding: 1.5rem; height: calc(100% - 37px); overflow-y: auto;
+    color: var(--text-color); line-height: 1.6;
 }
 .window-content h2 {
-    font-family: var(--font-pixel);
-    font-size: 2rem;
-    color: var(--window-header);
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 0.5rem;
-    transition: color 0.3s ease-out, border-color 0.3s ease-out;
+    font-family: var(--font-pixel); font-size: 2rem; color: var(--window-header);
+    margin-bottom: 1rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem;
 }
-.window-content p { margin-bottom: 1rem; }
-.window-content a {
-    color: var(--accent-blue);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease-out;
-}
+.window-content a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
 .window-content a:hover { text-decoration: underline; }
 
-/* --- Terminal --- */
+/* =========================================
+   5. APP SPECIFIC STYLES
+   ========================================= */
+
+/* --- Terminal (macOS Style Override) --- */
+#window-terminal .window-header {
+    background: #2d2d2d; border-bottom: 1px solid #1a1a1a;
+}
+#window-terminal .window-controls { margin-right: 10px; } /* Left align spacing */
+#window-terminal .window-btn { border: none; }
+#window-terminal .btn-close { background-color: #ff5f56; }
+#window-terminal .btn-min { background-color: #ffbd2e; }
+#window-terminal .btn-max { background-color: #27c93f; }
+
 #window-terminal .window-content {
-    background-color: #2e3440;
-    color: #eceff4;
-    font-family: var(--font-mono);
-    padding: 0.5rem;
+    background-color: #2e3440; color: #eceff4; font-family: var(--font-mono); padding: 0.5rem;
 }
-body.theme-sepia #window-terminal .window-content,
-body.theme-dark #window-terminal .window-content {
-    background-color: #2e3440;
-    color: #eceff4;
-}
-.terminal-output {
-    height: calc(100% - 30px);
-    overflow-y: auto;
-}
-.terminal-output p {
-    margin-bottom: 0.25rem;
-    line-height: 1.4;
-    white-space: pre-wrap;
-}
-.terminal-output .prompt-echo { color: var(--accent-blue); }
-.terminal-output .error { color: var(--close-btn); }
+.terminal-output { height: calc(100% - 30px); overflow-y: auto; }
+.terminal-output p { margin-bottom: 0.25rem; line-height: 1.4; white-space: pre-wrap; }
 .terminal-input-line { display: flex; align-items: center; }
-.terminal-prompt {
-    color: var(--accent-blue);
-    font-weight: 700;
-    margin-right: 8px;
+.terminal-prompt { color: var(--accent-blue); font-weight: 700; margin-right: 8px; }
+.terminal-input { background: none; border: none; color: #eceff4; font-family: var(--font-mono); font-size: 1rem; width: 100%; outline: none; }
+
+/* --- Focus App (System Integrity) --- */
+.focus-dashboard {
+    background: #2e3440; color: #eceff4; padding: 1.5rem; border-bottom: 1px solid #4c566a;
 }
-.terminal-input {
-    background: none;
-    border: none;
-    color: #eceff4;
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    width: 100%;
-    outline: none;
+#focus-timer-display {
+    font-family: 'Source Code Pro', monospace; font-size: 3rem; font-weight: 700; color: #a3be8c;
 }
+.focus-controls { display: flex; align-items: center; gap: 1rem; }
+#focus-start-btn {
+    padding: 0.5rem 1.5rem; background: var(--accent-blue); border: none; border-radius: 4px;
+    font-weight: bold; cursor: pointer; color: #fff;
+}
+#focus-start-btn.active { background: #ebcb8b; color: #2e3440; }
+
+/* Task List */
+#focus-task-list { background-color: var(--bg-color); padding: 1rem; }
+body.theme-dark #focus-task-list { background-color: #3b4252 !important; }
+
+.task-group { margin-bottom: 1.5rem; }
+.group-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid var(--border-color); margin-bottom: 0.5rem;
+}
+.group-header h3 { font-family: var(--font-pixel); font-size: 1rem; color: var(--window-header); margin: 0; }
+
+.task-item {
+    display: flex; align-items: center; padding: 0.5rem 0;
+    transition: background-color 0.2s ease; border-radius: 4px;
+}
+.task-item:hover { background-color: var(--shadow-light); }
+.task-checkbox-wrapper { display: flex; flex: 1; align-items: center; cursor: pointer; }
+.task-item input { margin-right: 12px; width: 16px; height: 16px; accent-color: var(--accent-blue); }
+.task-item label { cursor: pointer; font-size: 0.9rem; color: var(--text-color); }
+.task-item.done label { text-decoration: line-through; color: #999; opacity: 0.7; }
+.btn-tiny-delete { background: none; border: none; color: #bf616a; font-weight: bold; cursor: pointer; opacity: 0.5; font-size: 1.2rem; }
+.btn-tiny-delete:hover { opacity: 1; }
+
+/* --- Quiz Modal --- */
+.quiz-modal {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 2000;
+}
+.quiz-content {
+    background: #3b4252; color: #fff; padding: 2rem; border-radius: 8px; width: 400px;
+    text-align: center; border: 1px solid #88c0d0; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.quiz-btn {
+    padding: 12px; background: #4c566a; border: 1px solid #5e81ac; color: #fff;
+    cursor: pointer; font-family: 'Inter'; text-align: left; border-radius: 4px; transition: 0.2s;
+}
+.quiz-btn:hover { background: #88c0d0; color: #2e3440; }
+
 /* --- Settings --- */
 .theme-buttons { display: flex; flex-direction: column; gap: 1rem; }
 .theme-btn {
-    font-family: var(--font-main);
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--border-color);
-    border-radius: 6px;
-    background-color: var(--window-bg);
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.2s ease-out;
+    font-family: var(--font-main); font-size: 1rem; padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color); border-radius: 6px; background-color: var(--window-bg);
+    color: var(--text-color); cursor: pointer; transition: all 0.2s;
 }
-.theme-btn:hover {
-    border-color: var(--accent-color);
-    background-color: var(--bg-color);
-}
-.theme-btn.active {
-    border-color: var(--accent-blue);
-    color: var(--accent-blue);
-    font-weight: 700;
-}
-/* --- Snake --- */
-#window-snake .window-content {
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--text-color);
-}
-#snake-canvas {
-    width: 100%;
-    height: calc(100% - 40px);
-    background-color: var(--text-color);
-    transition: background-color 0.3s ease-out;
-}
+.theme-btn:hover { border-color: var(--accent-color); }
+.theme-btn.active { border-color: var(--accent-blue); color: var(--accent-blue); font-weight: 700; }
+
+/* --- PFD, Snake, Notepad --- */
+#window-snake .window-content, #window-pfd .window-content { padding: 0; background-color: #000; overflow: hidden; }
+#snake-canvas, #pfd-canvas { width: 100%; height: 100%; }
 #snake-score {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-pixel);
-    font-size: 1.5rem;
-    color: var(--window-bg);
-    background-color: var(--accent-color);
-    transition: background-color 0.3s ease-out, color 0.3s ease-out;
+    height: 40px; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-pixel); font-size: 1.5rem; color: var(--window-bg); background-color: var(--accent-color);
 }
-/* --- Notepad --- */
-#window-notepad .window-content {
-    padding: 0;
-    overflow: hidden;
-}
+#window-notepad .window-content { padding: 0; }
 #notepad-textarea {
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    border: none;
-    outline: none;
-    resize: none;
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--window-bg);
-    transition: background-color 0.3s ease-out, color 0.3s ease-out;
+    width: 100%; height: 100%; padding: 1rem; border: none; outline: none; resize: none;
+    font-family: var(--font-mono); font-size: 1rem; background-color: var(--window-bg); color: var(--text-color);
 }
 
-/* --- PFD --- */
-#window-pfd .window-content {
-    padding: 0;
-    background-color: #000;
-    overflow: hidden;
-}
-#pfd-canvas {
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-}
-
-/* --- Dock --- */
+/* =========================================
+   6. DOCK
+   ========================================= */
 .dock {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--dock-bg);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--dock-border);
-    border-radius: 12px;
-    padding: 8px;
-    display: flex;
-    gap: 8px;
-    z-index: 200;
-    transition: all 0.3s ease-out;
-    box-shadow: 0 5px 15px var(--shadow-light);
-    will-change: transform;
+    position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+    background-color: var(--dock-bg); backdrop-filter: blur(15px);
+    border: 1px solid var(--dock-border); border-radius: 12px; padding: 8px;
+    display: flex; gap: 8px; z-index: 200; box-shadow: 0 5px 15px var(--shadow-light);
 }
 .dock-icon {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    transition: transform 0.2s ease-out;
-    position: relative;
-    display: none;
-    will-change: transform;
+    width: 50px; height: 50px; cursor: pointer; transition: transform 0.2s; position: relative; display: none;
 }
 .dock-icon.is-minimized { display: block; }
 .dock-icon:hover { transform: scale(1.2) translateY(-5px); }
-.dock-icon svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 2px 4px var(--shadow-light));
+.dock-icon svg { width: 100%; height: 100%; filter: drop-shadow(0 2px 4px var(--shadow-light)); }
+.dock-icon.is-active::after {
+    content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+    width: 6px; height: 6px; background-color: var(--dock-active-dot); border-radius: 50%; display: block;
 }
-.dock-icon::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background-color: var(--dock-active-dot);
-    border-radius: 50%;
-    display: none;
-}
-.dock-icon.is-active::after { display: block; }
-/* --- Animations --- */
-@keyframes window-open {
-    from { transform: scale(0.95); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-@keyframes icon-jiggle {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-3deg); }
-    75% { transform: rotate(3deg); }
-}
+
+/* =========================================
+   7. ANIMATIONS & EXTRAS
+   ========================================= */
+@keyframes window-open { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes icon-jiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+@keyframes blinker { 50% { opacity: 0; } }
+@keyframes shimmer { 0% { text-shadow: 0 0 4px var(--window-header); } 50% { text-shadow: 0 0 20px var(--accent-blue); } 100% { text-shadow: 0 0 4px var(--window-header); } }
+
 .clickable-name.is-shimmering { animation: shimmer 1s ease-out; }
-@keyframes shimmer {
-    0% { text-shadow: 0 0 4px var(--window-header); }
-    50% { text-shadow: 0 0 20px var(--accent-blue); }
-    100% { text-shadow: 0 0 4px var(--window-header); }
-}
-[data-hover-tribute="heart"] {
-    position: relative;
-    cursor: default;
-}
 [data-hover-tribute="heart"]::after {
-    content: '❤';
-    position: absolute;
-    top: -10px;
-    right: 0px;
-    font-size: 1.2rem;
-    color: var(--close-btn);
-    opacity: 0;
-    transform: translateY(10px) scale(0.5);
-    transition: all 0.3s ease-out;
-    pointer-events: none;
+    content: '❤'; position: absolute; top: -10px; right: 0; font-size: 1.2rem;
+    color: var(--close-btn); opacity: 0; transform: translateY(10px) scale(0.5); transition: all 0.3s; pointer-events: none;
 }
-[data-hover-tribute="heart"]:hover::after {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-/* --- Mobile --- */
+[data-hover-tribute="heart"]:hover::after { opacity: 1; transform: translateY(0) scale(1); }
+
+/* Mobile Reset (Keep Desktop Layout) */
 @media (max-width: 768px) {
-    html, body { overflow-y: auto; }
-    .desktop {
-        padding: 1rem;
-        height: 100%;
-        min-height: 100vh;
-        overflow-y: auto;
-    }
-    .desktop-icons {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-        position: relative; 
-    }
-    .icon {
-        position: relative; 
-        top: auto !important; 
-        left: auto !important; 
-        width: 100px;
-        padding: 1rem;
-        animation: none;
-        cursor: pointer;
-    }
-    .icon:hover {
-        animation: none;
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-    .icon:active { cursor: pointer; }
-    .window {
-        display: none;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        max-width: 100vw;
-        max-height: 100vh;
-        border-radius: 0;
-        resize: none;
-        box-shadow: none;
-        animation: none;
-        z-index: 100;
-    }
-    .window.is-maximized { border-radius: 0; }
-    .window-header { cursor: default; }
-    .window-content {
-        height: calc(100% - 37px);
-        padding: 1rem;
-        -webkit-overflow-scrolling: touch;
-    }
-    .btn-min, .btn-max { display: none; }
-    .dock { display: none; }
-    
-    #window-snake .window-content { padding: 0; }
-    #window-notepad .window-content { padding: 0; }
-    #window-pfd .window-content { padding: 0; }
-}
-/* Ensure Boot Screen covers everything */
-.boot-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000; /* Black BIOS background */
-    color: #0f0; /* Terminal Green */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Top priority */
-    transition: opacity 0.8s ease-in-out; /* Smooth fade out */
-    cursor: pointer;
-}
-
-/* Class to hide the screen after clicking */
-.boot-screen.hidden {
-    opacity: 0;
-    pointer-events: none; /* Allow clicking through to the desktop */
-}
-
-/* Optional: Blinking cursor effect for the text */
-.blink {
-    animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {
-    50% { opacity: 0; }
+    /* Force desktop layout on mobile to preserve fidelity */
+    .desktop { min-width: 800px; overflow: auto; }
 }

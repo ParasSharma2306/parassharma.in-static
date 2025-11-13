@@ -1,77 +1,69 @@
-# ParasOS 🖥️✈️
+# ParasOS v1.1 - System Core
 
 **Live Demo:** [parassharma.in](https://parassharma.in)
 
-> A personal, interactive website built to resemble a retro-style desktop operating system. It is not just a portfolio; it's a digital world built from scratch.
+A high-fidelity personal operating system built on the web. It gamifies productivity by treating your study routine as a critical system process, complete with integrity checks, audio masking, and flight-deck visualizations.
 
-## 📖 About
+---
 
-**ParasOS** transforms the standard portfolio experience into an exploration. Instead of scrolling through a static page, visitors interact with a custom desktop environment. They can open apps, play games, write notes, and discover hidden secrets.
+## 🚀 System Modules
 
-It blends professional interests (coding, aviation) with deep personal tributes, featuring a custom-built A320neo-style Primary Flight Display (PFD) and a classic Snake game.
+### 1. Focus.exe (Integrity Monitor)
+The heart of the system. It replaces the standard "To-Do" list with a rigid protocol.
+* **Integrity Check:** You cannot simply "check" a box. The system challenges you with a query (e.g., *"Did you actually finish this or are you lying?"*) to ensure honest progress.
+* **Brown Noise Daemon:** A built-in audio generator that masks external distractions during study sessions.
+* **Exam Vector:** Live countdown to **Feb 20, 2026**.
 
-## 🚀 Why I Built This
+### 2. Terminal (The Shell)
+A fully simulated Zsh-style environment.
+* **True Shell:** Supports command history (`↑` / `↓`), screen clearing, and complex argument parsing.
+* **Control:** You can launch apps, manage your syllabus, and control the system timer entirely via text.
 
-This project is built on two foundations:
+### 3. Cockpit (Visualization)
+* **PFD (Primary Flight Display):** Visualizes your "System Integrity" (consistency). If you skip tasks, the system stability drops.
 
-### 1. A Love for Technology 💻
-This is a "from-scratch" celebration of what is possible with code. It serves as a playground for my obsession with technology, featuring everything from retro gaming to flight simulation logic.
+---
 
-### 2. A Tribute to My Foundation ❤️
-More importantly, this site is a living thank-you note to the people who built me:
-* **For my Grandpa:** A dedicated tribute to my champion, the man who bought my first phone and always stood up for me.
-* **For my Grandma, Garima Didi, and Dikshita:** A digital space to honor the love and support of my "foundation" and my "lighthouse."
+## 📟 Terminal Command Manual
 
-## 🛠️ The Tech Stack
+The CLI is the power-user way to navigate ParasOS.
 
-ParasOS is built entirely from scratch. **No frameworks. No libraries.**
+### Productivity
+| Command | Usage | Description |
+| :--- | :--- | :--- |
+| `todo` | `todo list` | Display the full syllabus task queue. |
+| | `todo add <Cat> <Name>` | Add a manual task (e.g., `todo add Physics Optics`). |
+| | `todo check <ID>` | Verify and complete a task by ID. |
+| | `todo del <ID>` | Remove a task from the register. |
+| `focus` | `focus start` | Initiate the Focus Daemon (Timer + Audio). |
+| | `focus stop` | Abort the current session. |
+| `status` | `status` | Report Days to Exam and Integrity Score. |
 
-* **Vanilla JavaScript (ESM):** Code is structured into modern, modular classes (`Desktop`, `Window`, `Terminal`, `PFD`) that communicate via an event bus.
-* **HTML5 Canvas:** The "Snake" game and the "PFD" (Primary Flight Display) are rendered in real-time on `<canvas>` elements for smooth, high-performance animation.
-* **Web Audio API:** There are no `.mp3` files here. All sound effects (UI clicks, Konami rewards, easter eggs) are synthesized live in the browser using the Web Audio API.
-* **LocalStorage:** State persistence. Your icon positions, notepad content, and theme preferences are saved locally, so the OS remembers exactly how you left it.
+### System
+| Command | Usage | Description |
+| :--- | :--- | :--- |
+| `open` | `open <app>` | Launch an app (e.g., `open snake`, `open terminal`). |
+| `close` | `close <app>` | Force terminate a window. |
+| `clear` | `clear` | Clear the terminal buffer. |
+| `reset` | `reset` | **Factory Reset:** Wipes all local data and reboots. |
+| `ls` | `ls` | List installed applications. |
 
-## 🕹️ User Guide
-
-### Desktop Interaction
-* **Open Apps:** Double-click an icon.
-* **Organize:** Click and drag icons to rearrange the desktop (positions are saved).
-* **Window Management:** Use the traffic light buttons:
-    * 🔴 **Red:** Close
-    * 🟡 **Yellow:** Minimize (sends to dock)
-    * 🟢 **Green:** Maximize
-
-### Mobile Interaction
-* **Open Apps:** Single tap.
-* **Close Apps:** Tap the Red close button in the navigation bar (apps open full-screen).
-
-## 🕵️‍♀️ Secrets & Easter Eggs
-
-ParasOS is full of hidden features. Here is the complete cheat sheet:
-
-### 1. The Konami Code 🎮
-Enter the classic cheat code to trigger a special reward.
-* **Desktop:** `↑` `↑` `↓` `↓` `←` `→` `←` `→` `b` `a`
-* **Mobile:** `Swipe Up` (x2), `Swipe Down` (x2), `Swipe Left`, `Swipe Right`, `Swipe Left`, `Swipe Right`, `Tap`, `Tap`
-* **Effect:** Plays a melodic "success" chime.
-
-### 2. Terminal Secrets 📟
-Open the **Terminal.sh** app to use these commands:
-
-| Command | Description |
+### Easter Eggs & Secrets
+| Command | Effect |
 | :--- | :--- |
-| `firstphone` | Reveals the humorous, heartfelt story about my grandpa and my Redmi Note 7S. |
-| `reset` | **Factory Reset:** Wipes all `localStorage` (icon positions, notes, themes) and reloads the site. |
+| `dikshita` | Access the secure heart vault. |
+| `love` | (Alias for above). |
+| `firstphone` | Reveal hardware history. |
+| `sudo` | Attempt privilege escalation. |
 
-### 3. Interactive Tributes ❤️
-In the **About.me** app:
-* **Hover** over "My Grandma", "Garima Didi", or "Dikshita" to trigger a heart animation and a soft chime.
-* **Click** my name ("Paras Sharma") **5 times** in a row to make it shimmer and play a "bloop" sound.
+---
 
-### 4. The Developer Greeting 👨‍💻
-Open your browser's **Developer Tools** (F12 / Ctrl+Shift+I) and check the Console for a hidden message from me to you.
+## 🎹 Shortcuts & Interaction
+* **Konami Code:** `↑ ↑ ↓ ↓ ← → ← → b a` (System Unlock).
+* **Double Click:** Open desktop icons.
+* **Drag:** Move windows via the header bar.
 
 ---
 
 **© 2025 Paras Sharma**
-*Built with code, caffeine, and love.*
+*Built with Vanilla JS, HTML5, and CSS3.*

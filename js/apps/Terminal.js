@@ -1,175 +1,320 @@
-/**
- * Logic for the Terminal window.
- */
+import DataManager from '../data/DataManager.js';
+
 class Terminal {
     constructor(windowInstance) {
         this.window = windowInstance;
+        this.container = document.getElementById('terminal-container');
+        this.historyEl = document.getElementById('terminal-history');
         this.input = document.getElementById('terminal-input');
-        this.output = document.getElementById('terminal-output');
+        
+        this.history = [];
+        this.historyIndex = -1;
+        this.booted = false;
         
         this.init();
     }
 
     init() {
-        this.window.el.addEventListener('mousedown', () => this.focusInput());
+        // 1. Ensure clicking anywhere in the black box focuses the input
+        this.window.el.addEventListener('click', () => {
+            if (this.input) this.input.focus();
+        });
         
+        if (!this.input) {
+            console.error("Terminal Error: Input element #terminal-input not found in DOM.");
+            return;
+        }
+
+        // 2. Master Event Listener
         this.input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                const command = this.input.value;
-                // Print the user's command with the prompt
-                this.printToTerminal(`<span class="prompt-echo">paras@home:~$ ${command}</span>`);
-                this.handleCommand(command);
+                // CRITICAL FIX: Prevent default form submission or newline insertion
+                e.preventDefault();
+                
+                const cmd = this.input.value;
+                
+                // A. Echo the user's command to the screen immediately
+                this.print(`<span style="color:#32d74b">➜</span> <span style="color:#81a1c1">~</span> ${cmd}`);
+                
+                // B. Process Command (if not empty)
+                if (cmd.trim()) {
+                    this.history.push(cmd);
+                    this.historyIndex = this.history.length;
+                    
+                    try {
+                        this.handleCommand(cmd);
+                    } catch (err) {
+                        console.error(err);
+                        this.print(`Shell Error: ${err.message}`, "color:#bf616a");
+                    }
+                }
+                
+                // C. Reset Input and Scroll
                 this.input.value = '';
-                this.focusInput();
+                this.scrollToBottom();
+                this.input.focus(); // Keep focus active
+            } 
+            else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (this.historyIndex > 0) {
+                    this.historyIndex--;
+                    this.input.value = this.history[this.historyIndex];
+                }
+            } 
+            else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (this.historyIndex < this.history.length - 1) {
+                    this.historyIndex++;
+                    this.input.value = this.history[this.historyIndex];
+                } else {
+                    this.historyIndex = this.history.length;
+                    this.input.value = '';
+                }
             }
         });
     }
 
-    /**
-     * Public method to be called by Window class on focus.
-     */
     start() {
-        this.focusInput();
-    }
-
-    focusInput() {
-        // Only focus if not disabled (e.g. during reset)
-        if (!this.input.disabled) {
-            this.input.focus();
-            this.output.scrollTop = this.output.scrollHeight;
+        if (this.input) this.input.focus();
+        
+        if (!this.booted) {
+            this.print("Last login: " + new Date().toLocaleString() + " on ttys000");
+            this.print("ParasOS Kernel v1.1 initialized.");
+            this.print("Type 'help' for commands.");
+            this.print("<br>");
+            this.booted = true;
         }
     }
 
-    printToTerminal(text) {
-        this.output.innerHTML += `<p>${text}</p>`;
-        this.output.scrollTop = this.output.scrollHeight;
+    scrollToBottom() {
+        if (this.container) {
+            this.container.scrollTop = this.container.scrollHeight;
+        }
     }
 
-    handleCommand(command) {
-        const cmd = command.toLowerCase().trim();
-        const desktop = this.window.desktop; 
+    print(html, style = "") {
+        const div = document.createElement('div');
+        div.style.wordBreak = "break-word";
+        div.style.marginBottom = "4px";
+        if (style) div.style = style; // Apply custom inline styles if passed
+        div.innerHTML = html;
         
-        switch (cmd) {
+        if (this.historyEl) {
+            this.historyEl.appendChild(div);
+            this.scrollToBottom();
+        }
+    }
+
+    handleCommand(str) {
+        const args = str.trim().split(/\s+/); // Split by spaces
+        const cmd = args[0].toLowerCase();
+        const desktop = this.window.desktop;
+        const focusApp = desktop.activeApps.focus;
+
+        switch(cmd) {
             case 'help':
-                this.printToTerminal(
-`Available commands:
-  help       - Shows this help message
-  guide      - Opens the 'Help.app'
-  about      - Opens the 'About.me' window
-  tribute    - Opens the 'Tribute.dat' window
-  projects   - Opens the 'Projects.exe' window
-  settings   - Opens the 'Settings.cfg' window
-  snake      - Opens the 'Snake.gm' game
-  notepad    - Opens the 'Notepad.txt' app
-  pfd        - Opens the 'PFD.app' (Flight Display)
-  legal      - Opens the 'Legal.txt' info
-  socials    - Displays my social media links
-  contact    - Displays my contact email
-  clear      - Clears the terminal screen
-  reset      - Resets the OS to factory defaults
-  exit       - Closes the terminal
-
-  (P.S. There might be a secret command... try 'firstphone'?)`
-                );
-                break;
-                
-            case 'about':
-                this.printToTerminal("Opening About.me...");
-                desktop.windows.get('window-about')?.open();
-                break;
-                
-            case 'tribute':
-                this.printToTerminal("Opening Tribute.dat...");
-                desktop.windows.get('window-tribute')?.open();
-                break;
-                
-            case 'projects':
-                this.printToTerminal("Opening Projects.exe...");
-                desktop.windows.get('window-projects')?.open();
-                break;
-                
-            case 'settings':
-                this.printToTerminal("Opening Settings.cfg...");
-                desktop.windows.get('window-settings')?.open();
-                break;
-                
-            case 'snake':
-                this.printToTerminal("Opening Snake.gm... Use Arrow Keys to play.");
-                desktop.windows.get('window-snake')?.open();
+                this.print(`
+<span style="color:#ebcb8b">SYSTEM:</span>  status, open [app], close [app], reset, exit
+<span style="color:#ebcb8b">TASKS:</span>   todo list, todo add, todo check, todo del
+<span style="color:#ebcb8b">FOCUS:</span>   focus start, focus stop
+<span style="color:#ebcb8b">SHELL:</span>   clear, ls, date, history, whoami
+`);
                 break;
 
-            case 'notepad':
-                this.printToTerminal("Opening Notepad.txt...");
-                desktop.windows.get('window-notepad')?.open();
-                break;
-
-            case 'pfd':
-                this.printToTerminal("Opening PFD.app...");
-                desktop.windows.get('window-pfd')?.open();
-                break;
-
-            case 'legal':
-                this.printToTerminal("Opening Legal.txt...");
-                desktop.windows.get('window-legal')?.open();
-                break;
-
-            case 'guide':
-                this.printToTerminal("Opening Help.app...");
-                desktop.windows.get('window-help')?.open();
-                break;
-
-            case 'socials':
-                this.printToTerminal(
-`GitHub:     <a href="https://github.com/ParasSharma2306" target="_blank">github.com/ParasSharma2306</a>
-X (Twitter):<a href="https://x.com/ParasSharma_23" target="_blank">x.com/ParasSharma_23</a>
-Instagram:  <a href="https://instagram.com/parassharma2306" target="_blank">instagram.com/parassharma2306</a>`
-                );
-                break;
-
-            case 'contact':
-                this.printToTerminal('Email: <a href="mailto:contact@parassharma.in">contact@parassharma.in</a>');
+            case 'ls':
+                this.print(`<span style="color:#88c0d0">Focus.app Terminal.app Projects.app Settings.cfg Help.app Snake.app</span>`);
                 break;
 
             case 'clear':
-                this.output.innerHTML = '';
+                if (this.historyEl) this.historyEl.innerHTML = '';
+                break;
+
+            case 'whoami':
+                this.print("root");
+                break;
+
+            case 'date':
+                this.print(new Date().toString());
+                break;
+
+            case 'history':
+                this.history.forEach((h, i) => this.print(`${i+1} ${h}`));
+                break;
+
+            case 'open':
+                if (!args[1]) {
+                    this.print("Usage: open <app>", "color:#bf616a");
+                    return;
+                }
+                // Normalize app name (remove .app, .exe etc)
+                const appName = args[1].toLowerCase().split('.')[0];
+                const win = desktop.windows.get(`window-${appName}`);
+                
+                if (win) { 
+                    win.open(); 
+                    this.print(`Launching ${args[1]}...`); 
+                } else {
+                    this.print(`Error: App '${args[1]}' not found.`, "color:#bf616a");
+                }
+                break;
+
+            case 'close':
+                if (!args[1]) return;
+                const closeName = args[1].toLowerCase().split('.')[0];
+                const winClose = desktop.windows.get(`window-${closeName}`);
+                if (winClose) { 
+                    winClose.close(); 
+                    this.print(`Terminated ${args[1]}.`); 
+                } else {
+                    this.print(`Process not found: ${args[1]}`);
+                }
+                break;
+
+            case 'status':
+                const days = DataManager.getDaysToExam();
+                const score = DataManager.getIntegrityScore ? DataManager.getIntegrityScore() : "100";
+                this.print(`--------------------------------`);
+                this.print(`TARGET     : Feb 20 2026`);
+                this.print(`T-MINUS    : ${days} Days`);
+                this.print(`INTEGRITY  : ${score}%`);
+                this.print(`--------------------------------`);
+                break;
+
+            // --- Focus / Timer Controls ---
+            case 'focus':
+                if (args[1] === 'start') {
+                    // 1. Open the window first
+                    desktop.windows.get('window-focus').open();
+                    // 2. Trigger the App Logic
+                    if (focusApp) {
+                        // Use the Pre-Flight Check just like the GUI
+                        focusApp.runQuiz(DataManager.getPreFlightCheck(), () => {
+                            focusApp.startTimer();
+                            this.print(">> TIMER STARTED", "color:#a3be8c");
+                        });
+                    } else {
+                        this.print("Error: Focus subsystem not responding.", "color:#bf616a");
+                    }
+                } else if (args[1] === 'stop') {
+                    if (focusApp) {
+                        focusApp.stopTimer();
+                        this.print(">> TIMER STOPPED", "color:#ebcb8b");
+                    }
+                } else {
+                    this.print("Usage: focus start | stop");
+                }
+                break;
+
+            // --- Todo Manager ---
+            case 'todo':
+                if (args[1] === 'list') {
+                    const list = DataManager.getSyllabus();
+                    if (list.length === 0) this.print("Task list is empty.");
+                    
+                    list.forEach(t => {
+                        const m = DataManager.isCompleted(t.id) ? '<span style="color:#a3be8c">[✔]</span>' : '<span style="color:#bf616a">[ ]</span>';
+                        this.print(`${m} <strong>${t.id}</strong>: ${t.title}`);
+                    });
+                } 
+                else if (args[1] === 'add') {
+                    // Syntax: todo add category taskname...
+                    if (args.length < 4) {
+                        this.print("Usage: todo add <Category> <Task Name>");
+                        return;
+                    }
+                    const cat = args[2];
+                    const title = args.slice(3).join(' ');
+                    const id = DataManager.addTask(cat, title);
+                    this.print(`Task Added: ${id}`, "color:#a3be8c");
+                    // Refresh GUI
+                    window.dispatchEvent(new Event('focus-data-update'));
+                } 
+                else if (args[1] === 'check') {
+                    if (!args[2]) {
+                        this.print("Usage: todo check <id>");
+                        return;
+                    }
+                    // Toggle state directly
+                    DataManager.toggleComplete(args[2]);
+                    this.print(`Task ${args[2]} state updated.`, "color:#a3be8c");
+                    window.dispatchEvent(new Event('focus-data-update'));
+                } 
+                else if (args[1] === 'del') {
+                    if (!args[2]) return;
+                    DataManager.deleteTask(args[2]);
+                    this.print(`Task ${args[2]} deleted.`, "color:#bf616a");
+                    window.dispatchEvent(new Event('focus-data-update'));
+                }
+                else {
+                    this.print("Usage: todo list | add | check | del");
+                }
+                break;
+
+            // --- Easter Eggs ---
+            case 'dikshita':
+            case 'love':
+                this.print(`<span style="color:#b48ead">>> ACCESSING SECURE VAULT...</span>`);
+                setTimeout(() => {
+                    this.print(`<span style="color:#fff">User: Dikshita verified.</span>`);
+                    this.print(`<span style="color:#ff79c6">"You are the anchor in this chaotic system."</span>`);
+                    this.print(`<span style="color:#ff79c6">"Thank you for keeping my code (and me) stable."</span>`);
+                    this.print(`<span style="color:#88c0d0">Status: Forever Connected.</span>`);
+                }, 600);
                 break;
             
-            case 'reset':
-                // 1. Lock input immediately
-                this.input.disabled = true;
-                this.printToTerminal("System reset initiated...");
-                
-                // 2. Clear data
-                localStorage.removeItem('paras-icon-positions');
-                localStorage.removeItem('paras-notepad-content');
-                localStorage.removeItem('theme');
+            case 'ping':
+                if (args[1] === 'dikshita') {
+                    this.print(`PING dikshita (127.0.0.1): 56 data bytes`);
+                    setTimeout(() => this.print(`64 bytes from dikshita: icmp_seq=0 ttl=64 time=0.001 ms (Always connected)`), 500);
+                    setTimeout(() => this.print(`64 bytes from dikshita: icmp_seq=1 ttl=64 time=0.001 ms (Zero latency heart link)`), 1000);
+                } else {
+                    this.print("pong");
+                }
+                break;
 
-                // 3. Show confirmation text
-                this.printToTerminal("Clearing local caches...");
-                
-                // 4. Reload after a delay (allows user to read text)
-                setTimeout(() => {
-                    this.printToTerminal("Rebooting...");
-                    setTimeout(() => window.location.reload(), 500);
-                }, 1500);
+            case 'grep':
+                if (args[1] === 'love' || args[1] === '"love"') {
+                    this.print(`Binary file (Heart) matches: Dikshita`);
+                } else {
+                    this.print("grep: missing operand");
+                }
+                break;
+
+            case 'man':
+                if (args[1] === 'dikshita') {
+                    this.print(`<span style="color:#88c0d0">NAME</span>`);
+                    this.print(`    Dikshita - The source of all stability.`);
+                    this.print(`<span style="color:#88c0d0">DESCRIPTION</span>`);
+                    this.print(`    Critical system component. Do not disconnect.`);
+                } else {
+                    this.print("No manual entry found.");
+                }
+                break;
+
+            case 'sudo':
+                if (args[1] === 'su' && args[2] === 'dikshita') {
+                    this.print(`<span style="color:#a3be8c">Access Granted. Welcome, Queen.</span>`);
+                } else {
+                    this.print("User is not in the sudoers file.");
+                }
+                break;
+
+            case 'firstphone':
+                this.print("Redmi Note 7S (Onyx Black). A brick with a soul.");
+                break;
+
+            case 'reset':
+                this.print("WARNING: Factory Reset in 3 seconds...");
+                localStorage.clear();
+                setTimeout(() => window.location.reload(), 3000);
                 break;
 
             case 'exit':
-                this.printToTerminal("Closing terminal...");
                 this.window.close();
-                break;
-            
-            case 'firstphone':
-                this.printToTerminal("Ah, the legend. It was a Redmi Note 7S (Onyx Black, 3/32GB) from 2019.");
-                this.printToTerminal("It had more patience than I did... and probably weighed less than my grandpa's love. (It was a brick.)");
-                break;
-
-            case '':
-                // Ignore empty enter keys
                 break;
 
             default:
-                this.printToTerminal(`<span class="error">Command not found: ${command}. Type 'help' for a list of commands.</span>`);
+                this.print(`zsh: command not found: ${cmd}`, "color:#bf616a");
         }
     }
 }

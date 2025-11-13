@@ -3,29 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ParasOS</title>
-    <!-- Import Fonts -->
+    <title>ParasOS v1.1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Pixelify+Sans:wght@400..700&family=Source_Code_Pro:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Link to Stylesheet -->
     <link rel="stylesheet" href="style.css">
-    <!-- Trigger Script-->
     <script src="js/app.js" type="module" defer></script>
 </head>
-<body> <!-- Theme class will be added here by JS -->
+<body>
 
-    <!-- Boot Screen -->
     <div class="boot-screen" id="boot-screen">
         <h1 class="boot-title">ParasOS</h1>
-        <p>Loading personal environment...</p>
-        <p class="blink" id="boot-text">Click anywhere to initialize system_</p>
+        <p>Booting Kernel...</p>
+        <p class="blink" id="boot-text">Click to Initialize_</p>
     </div>
 
-    <!-- Desktop holds all icons and windows -->
     <main class="desktop" id="desktop">
-
-        <!-- Desktop Icons (Positioned by JS) -->
         <div class="desktop-icons">
             
             <div class="icon" id="icon-projects" data-icon-id="projects">
@@ -36,6 +29,11 @@
             <div class="icon" id="icon-about" data-icon-id="about">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 6C13.66 6 15 7.34 15 9C15 10.66 13.66 12 12 12C10.34 12 9 10.66 9 9C9 7.34 10.34 6 12 6ZM12 20C9.33 20 7.01 18.73 5.5 16.89C5.64 14.94 9.33 13.9 12 13.9C14.67 13.9 18.36 14.94 18.5 16.89C17 18.73 14.67 20 12 20Z"></path></svg>
                 <span>About.me</span>
+            </div>
+
+            <div class="icon" id="icon-focus" data-icon-id="focus">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17ZM12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"></path></svg>
+                <span>Focus.exe</span>
             </div>
 
             <div class="icon" id="icon-tribute" data-icon-id="tribute">
@@ -69,7 +67,7 @@
             </div>
 
             <div class="icon" id="icon-legal" data-icon-id="legal">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.99902L21.5 6.71302V12.941C21.5 18.06 17.4 22.483 12 23.854C6.6 22.483 2.5 18.06 2.5 12.941V6.71302L12 1.99902ZM12 10.999H14.5V12.999H12V16.999H10V12.999H7.5V10.999H10V6.99902H12V10.999Z"></section></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.99902L21.5 6.71302V12.941C21.5 18.06 17.4 22.483 12 23.854C6.6 22.483 2.5 18.06 2.5 12.941V6.71302L12 1.99902ZM12 10.999H14.5V12.999H12V16.999H10V12.999H7.5V10.999H10V6.99902H12V10.999Z"></path></svg>
                 <span>Legal.txt</span>
             </div>
 
@@ -81,9 +79,36 @@
         </div>
 
 
-        <!-- Window Templates -->
+        <div class="window" id="window-focus" data-dock-icon="dock-focus">
+            <header class="window-header">
+                <span class="window-title">Focus // System Integrity</span>
+                <div class="window-controls">
+                    <button class="window-btn btn-min"></button>
+                    <button class="window-btn btn-max"></button>
+                    <button class="window-btn btn-close"></button>
+                </div>
+            </header>
+            <div class="window-content" style="padding: 0; display: flex; flex-direction: column;">
+                
+                <div style="background: #2e3440; color: #eceff4; padding: 1.5rem; border-bottom: 1px solid #4c566a;">
+                    
+                    <p id="focus-quote" style="font-family: 'Inter'; font-style: italic; opacity: 0.8; margin-bottom: 1rem;">"Loading inspiration..."</p>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div id="focus-timer-display" style="font-family: 'Source Code Pro'; font-size: 2.5rem; font-weight: 700;">25:00</div>
+                        <button id="focus-start-btn" style="padding: 0.5rem 1.5rem; background: #88c0d0; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">START FOCUS</button>
+                    </div>
+                    
+                    <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.6;">
+                        * Use Apple/YT Music in background for audio.
+                    </div>
+                </div>
 
-        <!-- Projects Window -->
+                <div id="focus-task-list" style="flex: 1; overflow-y: auto; padding: 1rem; background: #eceff4;">
+                    </div>
+            </div>
+        </div>
+
         <div class="window" id="window-projects" data-dock-icon="dock-projects">
             <header class="window-header">
                 <span class="window-title">My Projects</span>
@@ -107,7 +132,6 @@
             </div>
         </div>
 
-        <!-- About Window -->
         <div class="window" id="window-about" data-dock-icon="dock-about">
             <header class="window-header">
                 <span class="window-title">About Me & My Foundation</span>
@@ -131,7 +155,6 @@
             </div>
         </div>
 
-        <!-- Tribute Window -->
         <div class="window" id="window-tribute" data-dock-icon="dock-tribute">
             <header class="window-header">
                 <span class="window-title">A Tribute</span>
@@ -151,29 +174,24 @@
             </div>
         </div>
 
-        <!-- Terminal Window -->
         <div class="window" id="window-terminal" data-dock-icon="dock-terminal">
-            <header class="window-header">
-                <span class="window-title">Terminal</span>
+            <header class="window-header" style="background: #2d2d2d; border-bottom: 1px solid #1a1a1a;">
+                <span class="window-title" style="color: #999;">paras — -zsh</span>
                 <div class="window-controls">
                     <button class="window-btn btn-min"></button>
                     <button class="window-btn btn-max"></button>
                     <button class="window-btn btn-close"></button>
                 </div>
             </header>
-            <div class="window-content">
-                <div class="terminal-output" id="terminal-output">
-                    <p>Welcome to ParasOS v1.0</p>
-                    <p>Type 'help' to see available commands.</p>
-                </div>
-                <div class="terminal-input-line">
-                    <span class="terminal-prompt">paras@home:~$</span>
-                    <input type="text" class="terminal-input" id="terminal-input" autofocus>
+            <div class="window-content" style="padding:10px; background:rgba(30,30,30,0.95); color:#fff; overflow-y:auto; font-family:'JetBrains Mono', monospace;" id="terminal-container">
+                <div id="terminal-history"></div>
+                <div class="terminal-input-line" style="display:flex;">
+                    <span id="terminal-prompt-label" style="color:#32d74b; margin-right:8px;">➜  ~</span>
+                    <input type="text" id="terminal-input" style="flex:1; background:transparent; border:none; color:#fff; outline:none; font-family:inherit; font-size:1rem;" autocomplete="off" spellcheck="false">
                 </div>
             </div>
         </div>
         
-        <!-- Settings Window -->
         <div class="window" id="window-settings" data-dock-icon="dock-settings">
             <header class="window-header">
                 <span class="window-title">Settings</span>
@@ -194,7 +212,6 @@
             </div>
         </div>
 
-        <!-- Snake Window -->
         <div class="window" id="window-snake" data-dock-icon="dock-snake">
             <header class="window-header">
                 <span class="window-title">Snake</span>
@@ -210,7 +227,6 @@
             </div>
         </div>
 
-        <!-- Notepad Window -->
         <div class="window" id="window-notepad" data-dock-icon="dock-notepad">
             <header class="window-header">
                 <span class="window-title">Notepad</span>
@@ -225,7 +241,6 @@
             </div>
         </div>
 
-        <!-- PFD Window -->
         <div class="window" id="window-pfd" data-dock-icon="dock-pfd">
             <header class="window-header">
                 <span class="window-title">PFD.app</span>
@@ -240,7 +255,6 @@
             </div>
         </div>
 
-        <!-- Legal Window -->
         <div class="window" id="window-legal" data-dock-icon="dock-legal">
             <header class="window-header">
                 <span class="window-title">Legal</span>
@@ -259,7 +273,6 @@
             </div>
         </div>
 
-        <!-- Help Window -->
         <div class="window" id="window-help" data-dock-icon="dock-help">
             <header class="window-header">
                 <span class="window-title">Help</span>
@@ -270,34 +283,30 @@
                 </div>
             </header>
             <div class="window-content">
-                <h2>Help.app</h2>
-                <p>Welcome to ParasOS! Here's how to get around:</p>
+                <h2>Help.app (v1.1)</h2>
                 
-                <h3>On Desktop:</h3>
+                <h3>Getting Started</h3>
                 <ul>
-                    <li><strong>Open Apps:</strong> Double-click an icon.</li>
-                    <li><strong>Move Icons:</strong> Click and drag icons to arrange them. Positions are saved!</li>
-                    <li><strong>Move Windows:</strong> Click and drag the header bar.</li>
-                    <li><strong>Manage Windows:</strong> Use the top-left buttons to (Red) Close, (Yellow) Minimize, or (Green) Maximize.</li>
-                    <li><strong>Dock:</strong> Minimized apps appear in the dock at the bottom. Click to restore.</li>
+                    <li><strong>Focus.exe:</strong> Use the timer and task list to track your studies for 2026.</li>
+                    <li><strong>Terminal:</strong> The command center. Type <code>help</code> to see what you can do.</li>
+                    <li><strong>Cockpit:</strong> Visualizes your system integrity. Keep it stable!</li>
                 </ul>
 
-                <h3>On Mobile / Tablet:</h3>
+                <h3>Pro Tips</h3>
                 <ul>
-                    <li><strong>Open Apps:</strong> Single-tap an icon.</li>
-                    <li><strong>Manage Windows:</strong> Apps open full-screen. Use the (Red) Close button to return to the desktop.</li>
+                    <li>Clicking a task triggers an "Integrity Check". You must answer to tick the box.</li>
+                    <li>Try typing <code>status</code> in the terminal.</li>
                 </ul>
-
-                <h3>Find Secrets!</h3>
-                <p>This site is full of easter eggs. Try the terminal, try clicking things, try the Konami code... just explore!</p>
             </div>
         </div>
 
 
     </main>
 
-    <!-- Dock -->
     <div class="dock" id="dock">
+        <div class="dock-icon" id="dock-focus" data-window="window-focus">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17ZM12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"></path></svg>
+        </div>
         <div class="dock-icon" id="dock-projects" data-window="window-projects">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H18C19.1046 20 20 19.1046 20 18V6ZM18 6L12 11L6 6H18ZM18 18H6V8.23631L12 12.6102L18 8.23631V18Z"></path></svg>
         </div>
