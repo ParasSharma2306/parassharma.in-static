@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ParasOS v1.1</title>
+    <title>ParasOS v1.2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Pixelify+Sans:wght@400..700&family=Source_Code_Pro:wght@400;500&display=swap" rel="stylesheet">
@@ -134,23 +134,39 @@
 
         <div class="window" id="window-about" data-dock-icon="dock-about">
             <header class="window-header">
-                <span class="window-title">About Me & My Foundation</span>
-                <div class="window-controls">
-                    <button class="window-btn btn-min"></button>
-                    <button class="window-btn btn-max"></button>
-                    <button class="window-btn btn-close"></button>
-                </div>
+                <span class="window-title">About Me</span>
+                <div class="window-controls"><button class="window-btn btn-min"></button><button class="window-btn btn-max"></button><button class="window-btn btn-close"></button></div>
             </header>
-            <div class="window-content">
+            <div class="window-content" style="text-align: center;">
                 <h2>About.me</h2>
-                <p>Hello! I'm <span id="paras-name-easter-egg" class="clickable-name" style="user-select:none; display: inline-block;">Paras Sharma</span>. I'm obsessed with technology and aircrafts, I like flight sims particularly X-Plane 11, I wanna be a pilot, and I love programming. This is my personal corner of the internet, built from scratch with love.</p>
+                <p>Hello! I'm <span id="paras-name-easter-egg" class="clickable-name">Paras Sharma</span>. Coder. Pilot. Dreamer.</p>
+                <p>Building digital worlds to make the real one less boring.</p>
                 
-                <h3>My Foundation</h3>
-                <p>I'm built on the love and support of some incredible people:</p>
-                <ul>
-                    <li data-hover-tribute="heart"><strong>My Grandma:</strong> For showing me that strength and kindness can (and should) exist in the same person.</li>
-                    <li data-hover-tribute="heart"><strong>Garima Didi:</strong> To my sister, for being my first and most honest critic, and for always pushing me to be better.</li>
-                    <li data-hover-tribute="heart"><strong>Dikshita:</strong> To my girlfriend and to-be-wife, for being the lighthouse. It's really that simple.</li>
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+
+                <div class="love-section">
+                    <p style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 5px;">MY FOUNDATION & MY FUTURE</p>
+                    
+                    <h1 class="love-name" id="easter-dikshita">Dikshita</h1>
+                    
+                    <p>You are the love of my life, my to-be-wife, my partner in crime, the most beautiful woman in the entire observable universe, my lady.<br>It really is that simple.</p>
+                    
+                    <div class="shade-box">
+                        <p class="system-log">
+                            <span style="color:#bf616a">[SYSTEM LOG]:</span> 
+                            External analysis complete. Result: <strong>Irrelevant.</strong><br>
+                            Note to observers: This isn't code I was "compelled" to write.<br>
+                            This is the only source code that matters. We are hard-coded together.
+                        </p>
+                    </div>
+                </div>
+
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(0,0,0,0.1);">
+                
+                <h3>Credits</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li data-hover-tribute="heart"><strong>My Grandma</strong> - The Strength.</li>
+                    <li data-hover-tribute="heart"><strong>Garima Didi</strong> - The Guide.</li>
                 </ul>
             </div>
         </div>
@@ -283,7 +299,7 @@
                 </div>
             </header>
             <div class="window-content">
-                <h2>Help.app (v1.1)</h2>
+                <h2>Help.app (v1.2)</h2>
                 
                 <h3>Getting Started</h3>
                 <ul>

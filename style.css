@@ -313,3 +313,18 @@ body.theme-dark #focus-task-list { background-color: #3b4252 !important; }
     /* Force desktop layout on mobile to preserve fidelity */
     .desktop { min-width: 800px; overflow: auto; }
 }
+/* === ABOUT ME LOVE SECTION (NEW) === */
+.love-name {
+    font-size: 3.5rem; color: var(--close-btn); font-family: var(--font-pixel);
+    margin: 10px 0; text-shadow: 2px 2px 0px var(--text-color);
+    animation: heartbeat 1.5s infinite ease-in-out; cursor: pointer;
+}
+.shade-box {
+    background: rgba(0,0,0,0.05); padding: 10px; border-radius: 5px; margin-top: 20px;
+    border-left: 3px solid var(--text-color); text-align: left;
+}
+.system-log { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-color); opacity: 0.8; }
+@keyframes heartbeat { 
+    0%, 100% { transform: scale(1); } 
+    50% { transform: scale(1.05); } 
+}

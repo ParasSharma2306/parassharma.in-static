@@ -303,6 +303,20 @@ class Terminal {
                 this.print("Redmi Note 7S (Onyx Black). A brick with a soul.");
                 break;
 
+            case 'analysis':
+            case 'opinion':
+            case 'friend':
+                this.print(`<span style="color:#bf616a">>> SYSTEM ALERT: Jealousy Detected. <<</span>`);
+                this.print(`Filter applied. Negative opinions from external sources are automatically redirected to /dev/null.`);
+                break;
+            case 'compelled':
+                this.print(`<span style="color:#bf616a">Error: Variable 'Compulsion' not found.</span>`);
+                this.print(`Action driven by 'Love' kernel module. Try again.`);
+                break;
+            case 'separation':
+                this.print(`Operation failed. Entities 'Paras' and 'Dikshita' are merged at the binary level.`);
+                break;
+
             case 'reset':
                 this.print("WARNING: Factory Reset in 3 seconds...");
                 localStorage.clear();
