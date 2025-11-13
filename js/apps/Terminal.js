@@ -79,7 +79,7 @@ class Terminal {
         
         if (!this.booted) {
             this.print("Last login: " + new Date().toLocaleString() + " on ttys000");
-            this.print("ParasOS Kernel v1.1 initialized.");
+            this.print("ParasOS Kernel v1.2.1 initialized.");
             this.print("Type 'help' for commands.");
             this.print("<br>");
             this.booted = true;
@@ -301,6 +301,26 @@ class Terminal {
 
             case 'firstphone':
                 this.print("Redmi Note 7S (Onyx Black). A brick with a soul.");
+                break;
+
+            case 'random.rand':
+                const min = parseInt(args[1]);
+                const max = parseInt(args[2]);
+
+                if (!isNaN(min) && !isNaN(max)) {
+                    // Range Logic
+                    const val = Math.floor(Math.random() * (max - min + 1)) + min;
+                    this.print(`Random [${min}-${max}]: <span style="color:#a3be8c; font-weight:bold;">${val}</span>`);
+                } else {
+                    // Default 0-1
+                    this.print(`Random (0-1): ${Math.random()}`);
+                    this.print(`Tip: Use 'random.rand 1 100' for range.`, "color:#666");
+                }
+                break;
+
+            case 'random.raand':
+                this.print("Sonia Xalxo", "color:#cd853f; font-weight:bold;"); 
+                this.print(`Typo detected. Did you mean <span style="color:#a3be8c">random.rand</span>?`, "color:#bf616a");
                 break;
 
             case 'analysis':
