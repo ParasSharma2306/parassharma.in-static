@@ -178,23 +178,25 @@ class Window {
      * Toggles the maximized state.
      */
     toggleMaximize() {
-        const isMaximized = this.el.classList.toggle('is-maximized');
+        this.isMaximized = !this.isMaximized;
         
-        if (isMaximized) {
-            // Store position before maximizing
+        if (this.isMaximized) {
+            // Save state
             this.lastPosition.top = this.el.style.top;
             this.lastPosition.left = this.el.style.left;
+            this.el.classList.add('is-maximized');
         } else {
-            // Restore to last position
+            // Restore state
+            this.el.classList.remove('is-maximized');
             this.el.style.top = this.lastPosition.top;
             this.el.style.left = this.lastPosition.left;
         }
         
-        // Notify app logic to resize
-        setTimeout(() => {
-            const appId = this.id.replace('window-', '');
-            this.desktop.activeApps[appId]?.onResize?.();
-        }, 200);
+        // Trigger resize for Canvas apps (Snake, PFD)
+        const appId = this.id.replace('window-', '');
+        if (this.desktop.activeApps[appId]?.resize) {
+            setTimeout(() => this.desktop.activeApps[appId].resize(), 100);
+        }
     }
 
     /**

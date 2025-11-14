@@ -79,7 +79,7 @@ class Terminal {
         
         if (!this.booted) {
             this.print("Last login: " + new Date().toLocaleString() + " on ttys000");
-            this.print("ParasOS Kernel v1.2.1 initialized.");
+            this.print("ParasOS Kernel v1.3 initialized.");
             this.print("Type 'help' for commands.");
             this.print("<br>");
             this.booted = true;
@@ -119,6 +119,21 @@ class Terminal {
 <span style="color:#ebcb8b">FOCUS:</span>   focus start, focus stop
 <span style="color:#ebcb8b">SHELL:</span>   clear, ls, date, history, whoami
 `);
+                break;
+
+            case 'random.rand':
+                const min = parseInt(args[1]);
+                const max = parseInt(args[2]);
+
+                if (!isNaN(min) && !isNaN(max)) {
+                    // Range Logic
+                    const val = Math.floor(Math.random() * (max - min + 1)) + min;
+                    this.print(`Random [${min}-${max}]: <span style="color:#a3be8c; font-weight:bold;">${val}</span>`);
+                } else {
+                    // Default 0-1
+                    this.print(`Random (0-1): ${Math.random()}`);
+                    this.print(`Tip: Use 'random.rand 1 100' for range.`, "color:#666");
+                }
                 break;
 
             case 'ls':
@@ -267,8 +282,30 @@ class Terminal {
                     this.print(`PING dikshita (127.0.0.1): 56 data bytes`);
                     setTimeout(() => this.print(`64 bytes from dikshita: icmp_seq=0 ttl=64 time=0.001 ms (Always connected)`), 500);
                     setTimeout(() => this.print(`64 bytes from dikshita: icmp_seq=1 ttl=64 time=0.001 ms (Zero latency heart link)`), 1000);
-                } else {
+                    setTimeout(() => this.print(`<br><span style="color:#a3be8c">>> MESSAGE RECEIVED: Paras Loves You, Dikshita! <<</span>`), 1500);
+                } else if (args[1] === 'parikshita') {
+                    this.print(`PING parikshita (127.0.0.1): 56 data bytes`);
+                    setTimeout(() => this.print(`64 bytes from parikshita: icmp_seq=0 ttl=64 time=0.001 ms (Heartbeat Detected)`), 500);
+                    setTimeout(() => this.print(`64 bytes from parikshita: icmp_seq=1 ttl=64 time=0.001 ms (Syncing Emotions...)`), 1000);
+                    setTimeout(() => {
+                        this.print(`<br><span style="color:#e8a0bf">>> CONNECTION ESTABLISHED: Infinite Love Protocol <<</span>`);
+                        this.print(`<span style="color:#ff79c6">"In a world of variables, you are my only constant."</span>`);
+                        this.print(`Status: <span style="color:#a3be8c">Two souls, one kernel.</span>`);
+                    }, 1800);
+                } else if (args[1] === 'chinuk') {
+                    this.print(`PING chinuk: 56 data bytes`);
+                    setTimeout(() => this.print(`64 bytes from chinuk: icmp_seq=0 ttl=64 time=0.024 ms (Status: Radiating Jealousy)`), 500);
+                    setTimeout(() => this.print(`64 bytes from chinuk: icmp_seq=1 ttl=64 time=0.021 ms`), 1000);
+                    setTimeout(() => this.print(`<br><span style="color:#a3be8c">>> MESSAGE RECEIVED: She's just jealous! <<</span>`), 1500);
+                } else if (args[1] === 'sonya') {
+                    this.print(`PING sonya: 56 data bytes`);
+                    setTimeout(() => this.print(`64 bytes from sonya: icmp_seq=0 ttl=64 time=0.027 ms (Status: Selling Nudes)`), 500);
+                    setTimeout(() => this.print(`64 bytes from sonya: icmp_seq=1 ttl=64 time=0.029 ms`), 1000);
+                    setTimeout(() => this.print(`<br><span style="color:#a3be8c">>> MESSAGE RECEIVED: She's a Rrraaand! <<</span>`), 1500);
+                } else if (!args[1]) {
                     this.print("pong");
+                } else {
+                    this.print(`ping: cannot resolve ${args[1]}: Unknown host`);
                 }
                 break;
 
@@ -303,23 +340,8 @@ class Terminal {
                 this.print("Redmi Note 7S (Onyx Black). A brick with a soul.");
                 break;
 
-            case 'random.rand':
-                const min = parseInt(args[1]);
-                const max = parseInt(args[2]);
-
-                if (!isNaN(min) && !isNaN(max)) {
-                    // Range Logic
-                    const val = Math.floor(Math.random() * (max - min + 1)) + min;
-                    this.print(`Random [${min}-${max}]: <span style="color:#a3be8c; font-weight:bold;">${val}</span>`);
-                } else {
-                    // Default 0-1
-                    this.print(`Random (0-1): ${Math.random()}`);
-                    this.print(`Tip: Use 'random.rand 1 100' for range.`, "color:#666");
-                }
-                break;
-
             case 'random.raand':
-                this.print("Sonia Xalxo", "color:#cd853f; font-weight:bold;"); 
+                this.print("Soniya Khalko", "color:#cd853f; font-weight:bold;"); 
                 this.print(`Typo detected. Did you mean <span style="color:#a3be8c">random.rand</span>?`, "color:#bf616a");
                 break;
 

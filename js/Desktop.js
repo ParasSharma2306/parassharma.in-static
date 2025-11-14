@@ -38,7 +38,7 @@ class Desktop {
         this.initKonamiCode();
         this.initEasterEggs();
         this.initDraggableIcons();
-        console.log("System Online. Welcome Captain.");
+        console.log("System Booted.");
     }
 
     initWindows() {
@@ -125,13 +125,24 @@ class Desktop {
     }
 
     initThemeToggle() {
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = localStorage.getItem('theme') || "";
         if (savedTheme) document.body.className = savedTheme;
-        document.querySelectorAll('.theme-btn').forEach(btn => {
+
+        const buttons = document.querySelectorAll('.theme-btn');
+        
+        buttons.forEach(btn => {
+            const theme = btn.getAttribute('data-theme');
+            if (theme === savedTheme) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+
             btn.addEventListener('click', () => {
-                const theme = btn.dataset.theme;
                 document.body.className = theme;
                 localStorage.setItem('theme', theme);
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
             });
         });
     }
