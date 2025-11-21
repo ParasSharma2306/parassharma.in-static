@@ -341,3 +341,22 @@ body.theme-dark #focus-task-list { background-color: #3b4252 !important; }
     box-shadow: none !important;
     z-index: 1000 !important; /* Ensures it covers everything */
 }
+
+#window-promise .window-content {
+    background-color: #fff; 
+    color: #2e3440;
+}
+
+.confidant-highlight {
+    background-color: #ebcb8b;
+    color: #2e3440;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    border: 1px solid #d08770;
+}
+
+body.theme-dark #window-promise .window-content {
+    background-color: #2e3440;
+    color: #eceff4;
+}

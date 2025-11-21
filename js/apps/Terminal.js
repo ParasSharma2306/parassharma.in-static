@@ -79,7 +79,7 @@ class Terminal {
         
         if (!this.booted) {
             this.print("Last login: " + new Date().toLocaleString() + " on ttys000");
-            this.print("ParasOS Kernel v1.3 initialized.");
+            this.print("ParasOS Kernel v1.4 initialized.");
             this.print("Type 'help' for commands.");
             this.print("<br>");
             this.booted = true;
@@ -263,6 +263,42 @@ class Terminal {
                 else {
                     this.print("Usage: todo list | add | check | del");
                 }
+                break;
+
+            // --- REASSURANCE PROTOCOL ---
+            case 'apologise':
+                const priyoshiWin = desktop.windows.get('window-priyoshi');
+                if (priyoshiWin) {
+                    priyoshiWin.open();
+                    this.print(">> Opening heartfelt apology...", "color:#bf616a");
+                    this.print(">> Message Status: Delivered from the heart.");
+                }
+                break;
+
+            case 'confidant':
+                this.print(`<span style="color:#ebcb8b">DEFINITION: Confidant</span>`);
+                this.print(`(noun) A person with whom one shares a secret or private matter, trusting them not to repeat it to others.`);
+                this.print(`<br><em>"You are my best friend, my confidant, and my priority."</em>`);
+                break;
+
+            case 'compare':
+                this.print(`<span style="color:#bf616a">>> ERROR: Comparison Impossible.</span>`);
+                this.print(`Analysis: Other datasets (the_ones_selling_nudes) are irrelevant garbage data.`);
+                this.print(`Current User (You) is the <span style="color:#a3be8c">Primary & Only Priority</span>.`);
+                break;
+
+            case 'tesla':
+                this.print(`>> DELETING PREVIOUS RECORD...`);
+                setTimeout(() => {
+                    this.print(`>> "Dying alone" logic purged.`);
+                    this.print(`<span style="color:#a3be8c">>> NEW ENTRY: Future is locked with Her.</span>`);
+                }, 800);
+                break;
+
+            case 'sex':
+                this.print(`>> CLARIFICATION:`);
+                this.print(`You are not an object. You are the person I trust.`);
+                this.print(`Intimacy is a byproduct of love, not the condition for it.`);
                 break;
 
             // --- Easter Eggs ---
