@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Paras Sharma. Self Taught Developer.">
+    <meta name="keywords" content="Paras Sharma, Developer, Python, C++, DevOps, Linux, Portfolio">
+    <meta name="author" content="Paras Sharma">
+    <meta name="theme-color" content="#050505">
+    
+    <title>Paras Sharma</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%23ff0055%22 font-family=%22sans-serif%22 font-weight=%22900%22>P</text></svg>">
+
+    <script src="js/script.js" defer ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+    <div class="noise-overlay"></div>
+    
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <nav>
+        <div class="logo magnetic" data-strength="30">
+            <a href="index.html">PARAS<span class="pink">SHARMA</span></a>
+        </div>
+        
+        <div class="nav-items">
+            <a href="#about" class="nav-link magnetic" data-strength="20">ABOUT</a>
+            <a href="#work" class="nav-link magnetic" data-strength="20">WORK</a>
+            <a href="#contact" class="nav-link magnetic" data-strength="20">CONTACT</a>
+        </div>
+
+        <div class="mobile-menu-btn magnetic" data-strength="30">
+            <span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="#about" class="m-link">ABOUT</a>
+        <a href="#work" class="m-link">WORK</a>
+        <a href="#contact" class="m-link">CONTACT</a>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="status-pill reveal-hero">
+                    <span class="ping"></span> SYSTEM ONLINE
+                </div>
+                
+                <h1 class="title-display">
+                    <div class="line-wrap"><div class="line reveal-hero">CREATING</div></div>
+                    <div class="line-wrap"><div class="line reveal-hero">DIGITAL <span class="outline">REALITY.</span></div></div>
+                </h1>
+
+                <p class="hero-desc reveal-hero">
+                    Self-taught developer since 14. <br>
+                    Building systems that perform.
+                </p>
+            </div>
+            
+            <div class="scroll-down reveal-hero">
+                <div class="mouse"><div class="wheel"></div></div>
+            </div>
+        </section>
+
+        <section id="about" class="section-spacer">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h2 class="section-head fade-up">ABOUT ME</h2>
+                        <p class="bio-text fade-up">
+                            I started coding at <strong>14</strong>. I write code that is <strong>lean</strong>, <strong>secure</strong>, and <strong>performant</strong>.
+                        </p>
+                        <p class="bio-text fade-up">
+                            When I'm not <strong>coding</strong>, I'm flying in <strong>X-Plane</strong>. 
+                            (One day, I'll do it for real).
+                        </p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-pill magnetic pink-border">Python</span>
+                            <span class="tech-pill magnetic pink-border">JavaScript</span>
+                            <span class="tech-pill magnetic pink-border">C++</span>
+                            <span class="tech-pill magnetic pink-border">Node.js</span>
+                            <span class="tech-pill magnetic pink-border">HTML5</span>
+                            <span class="tech-pill magnetic pink-border">CSS3</span>
+                            <span class="tech-pill magnetic pink-border">Ubuntu</span>
+                            <span class="tech-pill magnetic pink-border">Nginx</span>
+                            <span class="tech-pill magnetic pink-border">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="section-spacer">
+            <div class="container">
+                <h2 class="section-head text-right fade-up">PROJECTS</h2>
+                
+                <div class="projects-container">
+                    
+                    <a href="https://parassharma.com" target="_blank" class="project-card spotlight-card fade-up full-width">
+                        <div class="spotlight"></div>
+                        <div class="card-inner">
+                            <div class="card-header">
+                                <span class="folder-id">/PRO</span>
+                                <span class="status-badge">BUSINESS</span>
+                            </div>
+                            <h3>PARASSHARMA.COM</h3>
+                            <p>Showcasing my content and creative projects.</p>
+                            <div class="card-arrow">↗</div>
+                        </div>
+                    </a>
+
+                    <div class="project-card spotlight-card secondary fade-up">
+                        <div class="spotlight"></div>
+                        <div class="card-inner">
+                            <div class="card-header">
+                                <span class="folder-id">/DEV</span>
+                                <span class="status-badge pink-badge">PERSONAL</span>
+                            </div>
+                            <h3>PARASSHARMA.IN</h3>
+                            <p>You're here. Personal portfolio, and testing environment for new projects.</p>
+                            <div class="card-arrow">↓</div>
+                        </div>
+                    </div>
+
+                    <a href="https://github.com/ParasSharma2306" target="_blank" class="project-card spotlight-card fade-up">
+                        <div class="spotlight"></div>
+                        <div class="card-inner">
+                            <div class="card-header">
+                                <span class="folder-id">/SRC</span>
+                                <span class="status-badge">SOURCE CODE</span>
+                            </div>
+                            <h3>GITHUB</h3>
+                            <p>The code behind the projects.</p>
+                            <div class="card-arrow">↗</div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-spacer">
+            <div class="container">
+                <h2 class="big-contact-text fade-up">COMM LINKS</h2>
+                
+                <div class="comms-dashboard fade-up">
+                    
+                    <a href="mailto:contact@parassharma.in" class="comm-node magnetic">
+                        <div class="node-top">
+                            <div class="node-icon">@</div>
+                            <div class="node-status online"></div>
+                        </div>
+                        <div class="node-data">
+                            <span class="node-label">EMAIL</span>
+                            <span class="node-value">contact@parassharma.in</span>
+                        </div>
+                    </a>
+
+                    <a href="https://x.com/ParasSharma_23" target="_blank" class="comm-node magnetic">
+                        <div class="node-top">
+                            <div class="node-icon">X</div>
+                            <div class="node-status online"></div>
+                        </div>
+                        <div class="node-data">
+                            <span class="node-label">X / TWITTER</span>
+                            <span class="node-value">@ParasSharma_23</span>
+                        </div>
+                    </a>
+
+                    <a href="https://instagram.com/parassharma2306" target="_blank" class="comm-node magnetic">
+                        <div class="node-top">
+                            <div class="node-icon">IG</div>
+                            <div class="node-status online"></div>
+                        </div>
+                        <div class="node-data">
+                            <span class="node-label">INSTAGRAM</span>
+                            <span class="node-value">@parassharma2306</span>
+                        </div>
+                    </a>
+
+                    <a href="https://youtube.com/@ParasSharma23" target="_blank" class="comm-node magnetic">
+                        <div class="node-top">
+                            <div class="node-icon">YT</div>
+                            <div class="node-status online"></div>
+                        </div>
+                        <div class="node-data">
+                            <span class="node-label">YOUTUBE</span>
+                            <span class="node-value">@ParasSharma23</span>
+                        </div>
+                    </a>
+
+                    <div class="comm-node disabled full-width-comm">
+                        <div class="node-top">
+                            <div class="node-icon">IN</div>
+                            <div class="node-status offline"></div>
+                        </div>
+                        <div class="node-data">
+                            <span class="node-label">LINKEDIN</span>
+                            <span class="node-value status-sleep">HIBERNATING</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-left">
+                    <span class="footer-logo"><a href="index.html"><span class="pink">PARAS</span>SHARMA</a></span>
+                    <p class="footer-copy">
+                        &copy; <span id="year">2025</span> Paras Sharma. All Rights Reserved.
+                    </p>
+                </div>
+                <div class="footer-nav">
+                    <a href="#about" class="f-link magnetic">About</a>
+                    <a href="#work" class="f-link magnetic">Work</a>
+                    <a href="#contact" class="f-link magnetic">Contact</a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>
